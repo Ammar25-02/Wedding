@@ -1,12 +1,13 @@
 # Jemputan Pertunangan — Ammar & Atiqah
 
-A single-page Malay engagement invitation (majlis pertunangan). It opens on a sealed
-envelope with the couple's monogram on its face; a tap opens the flap, lifts the
+A single-page Malay engagement invitation (majlis pertunangan). It opens on a portrait
+envelope sealed with a wax stamp pressed with the couple's monogram; a tap cracks
+the seal, opens the flap, lifts the
 letter out, and dissolves into three pages: the cover, the jemputan (details, map and countdown), and the doa
 with contacts. Watercolour botanical frames, drifting butterflies, and a
 live countdown.
 
-**Live:** _(GitHub Pages URL goes here once Pages is switched on)_
+**Live:** https://ammar25-02.github.io/Wedding/
 
 ## Editing it
 
@@ -83,7 +84,8 @@ placeholder:
 
 `logo.png` is the couple's monogram, converted from the original artwork onto a
 transparent background in its own mauve (`rgb(138,119,124)`). It sits on the
-face of the envelope, at the head of the cover, and again at the close. Replace
+wax seal at the envelope's centre (shown pale, as if pressed into the wax), at the
+head of the cover, and again at the close. Replace
 the file to change it everywhere.
 
 ## The music
