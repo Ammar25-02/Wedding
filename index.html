@@ -360,105 +360,152 @@
   .crest-mark.small{width:clamp(64px, 18vw, 88px); opacity:.8;}
 
   /* ---------------------------------------------------------------
-     The doors
-     Two leaves hinged at the outer edges. Each carries half of the
-     monogram, so the initials part along the seam as they open.
+     The envelope
+     A landscape envelope seen from the back, the monogram on its
+     face. Layers, bottom to top: the inside, the letter, the front
+     pocket, the flap. The flap swings up and back on its own
+     perspective, so the stacking stays flat and z-index still works.
      --------------------------------------------------------------- */
   body.sealed{overflow:hidden;}
 
-  .doors{
-    --logo-w:clamp(200px, 64vw, 330px);
-    --logo-h:calc(var(--logo-w) / 1.4737);   /* the logo's own proportion */
+  .gate{
+    --ew:min(84vw, 380px, calc(64 * var(--vh)));
+    --eh:calc(var(--ew) * .66);
     position:fixed; inset:0; z-index:50;
-    display:flex;
-    perspective:1600px;
-    cursor:pointer;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .doors:focus-visible{outline:none;}
-  .doors:focus-visible .knock span{outline:1px solid var(--gold); outline-offset:6px;}
-
-  .door{
-    position:relative;
-    width:50%; height:100%;
-    transition:transform 2.1s cubic-bezier(.62,.02,.22,1);
-    transform-style:preserve-3d;
-    will-change:transform;
-  }
-  .door.left{transform-origin:left center;}
-  .door.right{transform-origin:right center;}
-  .open .door.left{transform:rotateY(-104deg);}
-  .open .door.right{transform:rotateY(104deg);}
-
-  .leaf{
-    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding-top:calc(16 * var(--vh));        /* sit low: the letter rises above */
     overflow:hidden;
     background:
-      radial-gradient(120% 70% at 50% 45%, #FDF6F4 0%, #F7E8E8 55%, #EFD9DC 100%);
-    backface-visibility:hidden;
+      radial-gradient(60% 40% at 50% 55%, #FDF3F3 0%, rgba(253,243,243,0) 70%),
+      var(--paper);
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+    transition:opacity 1s ease;
   }
-  /* a thin shadow at the seam, so the two leaves read as separate doors */
-  .left .leaf{box-shadow:inset -10px 0 18px -12px rgba(107,90,82,.35);}
-  .right .leaf{box-shadow:inset 10px 0 18px -12px rgba(107,90,82,.35);}
-  .leaf::after{            /* laid-paper texture, as on the page beneath */
-    content:""; position:absolute; inset:0; pointer-events:none; opacity:.6;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+  .gate:focus-visible{outline:none;}
+  .gate:focus-visible .env-mark{outline:1px solid var(--gold); outline-offset:8px;}
+  .gate > .env, .gate > .knock{position:relative; z-index:1;}
+
+  .env{
+    position:relative;
+    width:var(--ew); height:var(--eh);
+    transition:transform 1s cubic-bezier(.4,0,.6,1);
+  }
+  .env > div{position:absolute; inset:0;}
+
+  .env-back{
+    z-index:1; border-radius:4px;
+    background:linear-gradient(170deg, #D9B3BD 0%, #CDA2AE 60%, #C697A4 100%);
+    box-shadow:0 26px 48px -20px rgba(107,90,82,.45);
+  }
+  .env-back::after{       /* shadow inside, where the letter sits */
+    content:""; position:absolute; inset:0; border-radius:4px;
+    background:linear-gradient(180deg, rgba(107,90,82,.3), rgba(107,90,82,0) 40%);
   }
 
-  /* a gilded panel inset on each leaf */
-  .frame{
-    position:absolute;
-    top:clamp(22px, 5vh, 46px); bottom:clamp(22px, 5vh, 46px);
-    border:1px solid rgba(194,160,99,.55);
-    box-shadow:inset 0 0 0 5px rgba(255,255,255,.35), inset 0 0 0 6px rgba(194,160,99,.25);
+  .letter{
+    z-index:2;
+    top:auto !important; left:6% !important; right:6% !important; bottom:5% !important;
+    height:86%;
+    display:flex; flex-direction:column; align-items:center; gap:.45em;
+    padding-top:9%;
+    background:linear-gradient(180deg, #FFFDFB 0%, #FBF0F1 100%);
+    border-radius:2px;
+    box-shadow:0 10px 24px -12px rgba(107,90,82,.35);
+    transform:translateY(0);
+    transition:transform 1.15s cubic-bezier(.22,.86,.26,1);
   }
-  .left .frame{left:clamp(16px, 5vw, 40px); right:14px;}
-  .right .frame{right:clamp(16px, 5vw, 40px); left:14px;}
+  .letter::before{        /* gilt hairline border */
+    content:""; position:absolute; inset:7px;
+    border:1px solid rgba(194,160,99,.45);
+    pointer-events:none;
+  }
+  .letter-eyebrow{
+    margin:0;
+    font-size:clamp(8px, 2.2vw, 10px);
+    letter-spacing:.32em; text-transform:uppercase; text-indent:.32em;
+    color:var(--ink-soft);
+  }
+  .letter-names{
+    margin:0;
+    font-family:var(--script);
+    font-size:clamp(24px, 7.4vw, 36px);
+    line-height:1.15;
+    color:var(--ink);
+  }
+  .letter .rule{width:38%;}
+  .letter-date{
+    margin:0;
+    font-size:clamp(8px, 2.2vw, 10px);
+    letter-spacing:.26em; text-indent:.26em;
+    color:var(--ink);
+    font-variant-numeric:lining-nums;
+  }
 
-  /* half a monogram each, cut exactly at the seam */
-  .crest{
-    position:absolute; top:50%;
-    width:calc(var(--logo-w) / 2); height:var(--logo-h);
-    margin-top:calc(var(--logo-h) / -2);
-    overflow:hidden;
+  .env-front{
+    z-index:3; border-radius:4px; overflow:hidden;
+    background:linear-gradient(168deg, #FBF1F2 0%, #F4E1E5 55%, #E9CDD4 100%);
+    box-shadow:0 -1px 5px rgba(107,90,82,.12);
   }
-  .left .crest{right:0;}
-  .right .crest{left:0;}
-  .crest img{position:absolute; top:0; width:var(--logo-w); height:var(--logo-h); max-width:none;}
-  .left .crest img{left:0;}
-  .right .crest img{right:0;}
+  .env-front::before{      /* the bottom flap, folded up */
+    content:""; position:absolute; inset:0;
+    clip-path:polygon(0 100%, 50% 40%, 100% 100%);
+    background:linear-gradient(0deg, rgba(255,255,255,.5), rgba(255,255,255,.12));
+  }
+  .side{position:absolute; top:0; bottom:0; width:52%;}
+  .side.l{left:0;  clip-path:polygon(0 0, 100% 52%, 0 100%);
+          background:linear-gradient(90deg, rgba(214,178,188,.55), rgba(214,178,188,0));}
+  .side.r{right:0; clip-path:polygon(100% 0, 0 52%, 100% 100%);
+          background:linear-gradient(270deg, rgba(214,178,188,.55), rgba(214,178,188,0));}
 
-  /* a small gilt ring pull on each leaf, just off the seam */
-  .pull{
-    position:absolute; top:calc(50% + var(--logo-h) / 2 + 26px);
-    width:16px; height:16px;
-    border:1.5px solid rgba(194,160,99,.85);
-    border-radius:50%;
+  /* the monogram on the envelope's face, below the flap's point */
+  .env-mark{
+    position:absolute; left:50%; bottom:9%;
+    width:31%; height:auto;
+    transform:translateX(-50%);
+    z-index:1;
   }
-  .left .pull{right:14px;}
-  .right .pull{left:14px;}
+
+  .flap-hold{z-index:5; perspective:1200px;}
+  .flap{
+    position:absolute; top:0; left:0;
+    width:100%; height:52%;
+    transform-origin:50% 0;
+    transform:rotateX(0deg);
+    transition:transform 1s cubic-bezier(.6,.02,.28,1);
+    clip-path:polygon(0 0, 100% 0, 50% 100%);
+    background:linear-gradient(186deg, #FCF3F4 0%, #F4E1E5 56%, #E6C8D0 100%);
+    filter:drop-shadow(0 6px 8px rgba(107,90,82,.18));
+  }
+  .opening .flap{transform:rotateX(-172deg); filter:none;}
+  .flap-behind{z-index:0 !important;}
+
+  .lifted .letter{transform:translateY(-62%);}
+
+  .away{opacity:0;}
+  .away .env{transform:scale(1.06);}
+  .gone{visibility:hidden;}
 
   .knock{
-    position:absolute; left:0; right:0;
-    bottom:calc(9 * var(--vh) + env(safe-area-inset-bottom, 0px));
-    margin:0; text-align:center; z-index:2;
+    margin:calc(7 * var(--vh)) 0 0; text-align:center;
     font-size:clamp(10px, 2.8vw, 12px);
     letter-spacing:.34em; text-transform:uppercase; text-indent:.34em;
     color:var(--ink-soft);
     transition:opacity .5s ease;
     pointer-events:none;
   }
-  .open .knock{opacity:0;}
+  .opening .knock{opacity:0;}
   @media (prefers-reduced-motion:no-preference){
     .knock span{display:inline-block; animation:breathe 3.2s ease-in-out infinite;}
     @keyframes breathe{0%,100%{opacity:.45} 50%{opacity:1}}
   }
-  .gone{visibility:hidden;}
 
-  /* reduced motion: the doors part by fading rather than swinging */
+  /* reduced motion: things fade rather than swing and slide */
   @media (prefers-reduced-motion:reduce){
-    .door{transition:opacity 1s ease;}
-    .open .door.left, .open .door.right{transform:none; opacity:0;}
+    .flap{transition:opacity .6s ease;}
+    .opening .flap{transform:none; opacity:0;}
+    .lifted .letter{transform:none;}
+    .away .env{transform:none;}
   }
 
   .reveal{opacity:0; transform:translateY(18px);}
@@ -549,25 +596,33 @@
 </svg>
 
 <!-- ============================================================
-     The doors. Each carries half of the monogram, cut exactly at
-     the seam, so opening them parts the initials.
+     The envelope. The monogram sits on its face; tapping opens the
+     flap, lifts the letter out, then dissolves into the invitation.
      ============================================================ -->
-<div class="doors" id="doors" role="button" tabindex="0" aria-label="Buka jemputan">
-  <div class="door left">
-    <div class="leaf">
-      <span class="frame" aria-hidden="true"></span>
-      <span class="crest"><img src="logo.png" alt=""></span>
-      <span class="pull" aria-hidden="true"></span>
+<div class="gate" id="gate" role="button" tabindex="0" aria-label="Buka jemputan">
+  <svg class="flora top" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+  <svg class="flora bottom" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+
+  <div class="env" id="env">
+    <div class="env-back"></div>
+
+    <div class="letter" aria-hidden="true">
+      <p class="letter-eyebrow" data-f="majlis">Majlis Pertunangan</p>
+      <p class="letter-names"><span data-f="nama1">Ammar</span> &amp; <span data-f="nama2">Atiqah</span></p>
+      <div class="rule"><i></i></div>
+      <p class="letter-date" data-f="coverTarikh">SABTU · 7 NOVEMBER 2026</p>
     </div>
-  </div>
-  <div class="door right">
-    <div class="leaf">
-      <span class="frame" aria-hidden="true"></span>
-      <span class="crest"><img src="logo.png" alt=""></span>
-      <span class="pull" aria-hidden="true"></span>
+
+    <div class="env-front">
+      <span class="side l" aria-hidden="true"></span>
+      <span class="side r" aria-hidden="true"></span>
+      <img class="env-mark" src="logo.png" alt="Monogram Ammar &amp; Atiqah">
     </div>
+
+    <div class="flap-hold" id="flapHold"><div class="flap"></div></div>
   </div>
-  <p class="knock" id="knock"><span>Sentuh untuk membuka</span></p>
+
+  <p class="knock"><span>Sentuh untuk membuka</span></p>
 </div>
 
 <main>
@@ -939,23 +994,31 @@
     revealables.forEach(function(el){ el.classList.add('in'); });
   }
 
-  /* ---------- the doors ---------- */
-  /* Tapping opens them; once the swing has finished they are hidden outright
-     so they can never sit invisibly over the page and swallow taps. */
-  var doors = $('#doors');
+  /* ---------- the envelope ---------- */
+  /* One tap: the flap opens, the letter lifts, and the envelope dissolves
+     into the invitation. The song starts inside that same tap, which is
+     the gesture phones require before any audio may play. Once gone, the
+     overlay is hidden outright so it can never swallow taps. */
+  var gate = $('#gate');
+  var flapHold = $('#flapHold');
   var opened = false;
-  function openDoors(){
+  function openEnvelope(){
     if(opened) return;
     opened = true;
-    doors.classList.add('open');
-    startSong();                        /* inside the tap, so phones allow it */
-    doors.setAttribute('aria-hidden', 'true');
-    setTimeout(function(){ document.body.classList.remove('sealed'); }, reduced ? 300 : 1100);
-    setTimeout(function(){ doors.classList.add('gone'); }, reduced ? 1100 : 2200);
+    gate.classList.add('opening');
+    gate.setAttribute('aria-hidden', 'true');
+    startSong();
+    setTimeout(function(){ flapHold.classList.add('flap-behind'); }, reduced ? 0 : 480);
+    setTimeout(function(){ gate.classList.add('lifted'); }, reduced ? 150 : 950);
+    setTimeout(function(){
+      gate.classList.add('away');
+      document.body.classList.remove('sealed');
+    }, reduced ? 900 : 2600);
+    setTimeout(function(){ gate.classList.add('gone'); }, reduced ? 1900 : 3700);
   }
-  doors.addEventListener('click', openDoors);
-  doors.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openDoors(); }
+  gate.addEventListener('click', openEnvelope);
+  gate.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openEnvelope(); }
   });
 
   /* ---------- scroll cue ---------- */
@@ -1080,7 +1143,7 @@
     song.loop = true;
     song.preload = 'auto';
     document.body.appendChild(song);
-    /* not started here: the music begins as the doors open (see openDoors),
+    /* not started here: the music begins as the envelope opens (see openEnvelope),
        and that tap is the very gesture phones require before audio can play */
   }else{
     sound.parentNode.removeChild(sound);

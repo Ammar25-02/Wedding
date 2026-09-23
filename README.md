@@ -1,8 +1,8 @@
 # Jemputan Pertunangan — Ammar & Atiqah
 
-A single-page Malay engagement invitation (majlis pertunangan). It opens on a pair
-of doors carrying the couple's monogram, which part as they swing open to reveal
-three pages: the cover, the jemputan (details, map and countdown), and the doa
+A single-page Malay engagement invitation (majlis pertunangan). It opens on a sealed
+envelope with the couple's monogram on its face; a tap opens the flap, lifts the
+letter out, and dissolves into three pages: the cover, the jemputan (details, map and countdown), and the doa
 with contacts. Watercolour botanical frames, drifting butterflies, and a
 live countdown.
 
@@ -77,24 +77,20 @@ placeholder:
 - [ ] `waze` — empty, so that button is hidden; fill it in to show it
 - [ ] `masa` — currently `2:00 PETANG`; add an end time if the majlis has one
 - [ ] `pantun` — swap in your own couplet if you'd rather
-- [x] `lagu` — set to `lagu.m4a`; starts as the doors open
+- [x] `lagu` — set to `lagu.m4a`; starts as the envelope opens
 
 ## The monogram
 
 `logo.png` is the couple's monogram, converted from the original artwork onto a
-transparent background in its own mauve (`rgb(138,119,124)`). It appears on the
-doors — split exactly at the seam, one initial per door — on the cover, and
-again at the close.
-
-If you replace it, keep the new file's width-to-height ratio in mind: the doors
-split the image using `--logo-h: calc(var(--logo-w) / 1.4737)` in the CSS.
-Update that number to your new image's ratio, or the two halves won't meet.
+transparent background in its own mauve (`rgb(138,119,124)`). It sits on the
+face of the envelope, at the head of the cover, and again at the close. Replace
+the file to change it everywhere.
 
 ## The music
 
-`lagu.m4a` starts as the doors open — deliberately not on page load. Phones
+`lagu.m4a` starts as the envelope opens — deliberately not on page load. Phones
 block audio until the visitor taps something, and the tap that opens the
-doors is exactly that gesture, so it plays reliably on iPhones as well.
+envelope is exactly that gesture, so it plays reliably on iPhones as well.
 
 It is an `.m4a`, not an `.mp3`: the downloaded file was AAC audio in an MP4
 container carrying a misleading `.mp3` name. Under that name GitHub Pages
