@@ -77,7 +77,7 @@ placeholder:
 - [ ] `waze` — empty, so that button is hidden; fill it in to show it
 - [ ] `masa` — currently `2:00 PETANG`; add an end time if the majlis has one
 - [ ] `pantun` — swap in your own couplet if you'd rather
-- [ ] `lagu` — drop an mp3 in this folder and name it here for music
+- [x] `lagu` — set to `lagu.m4a`; starts as the doors open
 
 ## The monogram
 
@@ -89,3 +89,15 @@ again at the close.
 If you replace it, keep the new file's width-to-height ratio in mind: the doors
 split the image using `--logo-h: calc(var(--logo-w) / 1.4737)` in the CSS.
 Update that number to your new image's ratio, or the two halves won't meet.
+
+## The music
+
+`lagu.m4a` starts as the doors open — deliberately not on page load. Phones
+block audio until the visitor taps something, and the tap that opens the
+doors is exactly that gesture, so it plays reliably on iPhones as well.
+
+It is an `.m4a`, not an `.mp3`: the downloaded file was AAC audio in an MP4
+container carrying a misleading `.mp3` name. Under that name GitHub Pages
+would serve it as `audio/mpeg`, and Safari can refuse audio whose declared
+type doesn't match its contents. If you swap the song, keep the extension
+true to the file.

@@ -759,7 +759,7 @@
 
     /* ISI DI SINI — letak fail lagu di folder ini dan namakannya, cth 'songs.mp3'.
        Kosong = tiada muzik, dan butang senyap turut hilang. */
-    lagu: ''
+    lagu: 'lagu.m4a'
   };
   /* ============================ end ============================= */
 
@@ -948,6 +948,7 @@
     if(opened) return;
     opened = true;
     doors.classList.add('open');
+    startSong();                        /* inside the tap, so phones allow it */
     doors.setAttribute('aria-hidden', 'true');
     setTimeout(function(){ document.body.classList.remove('sealed'); }, reduced ? 300 : 1100);
     setTimeout(function(){ doors.classList.add('gone'); }, reduced ? 1100 : 2200);
@@ -1079,7 +1080,8 @@
     song.loop = true;
     song.preload = 'auto';
     document.body.appendChild(song);
-    startSong();
+    /* not started here: the music begins as the doors open (see openDoors),
+       and that tap is the very gesture phones require before audio can play */
   }else{
     sound.parentNode.removeChild(sound);
   }
