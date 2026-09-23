@@ -1,7 +1,10 @@
 # Jemputan Pertunangan — Ammar & Atiqah
 
-A single-page Malay engagement invitation (majlis pertunangan): a scrolling, sectioned card with a
-watercolour botanical frame, drifting butterflies and a live countdown.
+A single-page Malay engagement invitation (majlis pertunangan). It opens on a pair
+of doors carrying the couple's monogram, which part as they swing open to reveal
+three pages: the cover, the jemputan (details, map and countdown), and the doa
+with contacts. Watercolour botanical frames, drifting butterflies, and a
+live countdown.
 
 **Live:** _(GitHub Pages URL goes here once Pages is switched on)_
 
@@ -75,3 +78,14 @@ placeholder:
 - [ ] `masa` — currently `2:00 PETANG`; add an end time if the majlis has one
 - [ ] `pantun` — swap in your own couplet if you'd rather
 - [ ] `lagu` — drop an mp3 in this folder and name it here for music
+
+## The monogram
+
+`logo.png` is the couple's monogram, converted from the original artwork onto a
+transparent background in its own mauve (`rgb(138,119,124)`). It appears on the
+doors — split exactly at the seam, one initial per door — on the cover, and
+again at the close.
+
+If you replace it, keep the new file's width-to-height ratio in mind: the doors
+split the image using `--logo-h: calc(var(--logo-w) / 1.4737)` in the CSS.
+Update that number to your new image's ratio, or the two halves won't meet.
