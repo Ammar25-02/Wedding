@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FCF9F5">
+<meta name="description" content="Jemputan ke majlis pertunangan Ammar & Atiqah — Sabtu, 7 November 2026, Melaka.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
+<title>Ammar &amp; Atiqah</title>
+
+<style>
+  /* ---------------------------------------------------------------
+     Typefaces, self-hosted so the page never waits on a font CDN.
+     All SIL Open Font Licence — see fonts/OFL.txt
+     --------------------------------------------------------------- */
+  @font-face{
+    font-family:'Pinyon Script'; font-style:normal; font-weight:400; font-display:swap;
+    src:url('fonts/pinyon.woff2') format('woff2');
+  }
+  @font-face{
+    font-family:'Cormorant Garamond'; font-style:normal; font-weight:400; font-display:swap;
+    src:url('fonts/cormorant400.woff2') format('woff2');
+  }
+  @font-face{
+    font-family:'Cormorant Garamond'; font-style:normal; font-weight:500; font-display:swap;
+    src:url('fonts/cormorant500.woff2') format('woff2');
+  }
+  @font-face{
+    font-family:'Amiri'; font-style:normal; font-weight:400; font-display:swap;
+    src:url('fonts/amiri.woff2') format('woff2');
+  }
+
+  :root{
+    --paper:#FCF9F5;
+    --paper-deep:#F3EBE1;
+    --blush:#F8E5E8;
+    --blush-deep:#EBC6CE;
+    --ink:#6B5A52;
+    --ink-soft:#9C8C82;
+    --gold:#C2A063;
+    --sage:#A3B394;
+    --rose:#E4A2B4;
+    --lilac:#C4B0D8;
+    --petal:#F6D3DA;
+    --teal:#5CBFBE;
+
+    --script:'Pinyon Script', 'Segoe Script', cursive;
+    --serif:'Cormorant Garamond', 'Iowan Old Style', Palatino, Georgia, serif;
+    --arabic:'Amiri', 'Traditional Arabic', serif;
+
+    --vh:1vh;
+    --gutter:clamp(20px, 7vw, 42px);
+  }
+  @supports (height:1svh){ :root{ --vh:1svh; } }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:auto;}
+  @media (prefers-reduced-motion:no-preference){
+    html{scroll-behavior:smooth;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:17px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    /* Cormorant defaults to old-style figures, which turn a countdown's "10"
+       into something that reads as "IO". Dates and clocks need lining. */
+    font-variant-numeric:lining-nums;
+  }
+
+  /* laid paper, woven from a little turbulence rather than a photo */
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+  }
+
+  #flutter{position:fixed; inset:0; width:100%; height:100%; z-index:2; pointer-events:none;}
+
+  main{position:relative; z-index:1;}
+
+  /* ---------------------------------------------------------------
+     Sections
+     --------------------------------------------------------------- */
+  .sheet{
+    position:relative;
+    min-height:100vh;
+    min-height:calc(100 * var(--vh));
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:calc(11 * var(--vh)) var(--gutter);
+    text-align:center;
+    overflow:hidden;
+  }
+  .sheet > *{position:relative; z-index:1;}
+
+  .inner{width:100%; max-width:30rem; margin:0 auto;}
+
+  /* the botanical frames sit behind everything, bleeding off the edges */
+  .flora{
+    position:absolute; left:50%; transform:translateX(-50%);
+    width:min(150%, 760px); height:auto;
+    z-index:0; pointer-events:none;
+    opacity:.95;
+    /* the blurred washes would otherwise be cut off square at the svg's edge,
+       leaving a visible seam across the page */
+    -webkit-mask-image:linear-gradient(to bottom, #000 42%, rgba(0,0,0,0) 100%);
+    mask-image:linear-gradient(to bottom, #000 42%, rgba(0,0,0,0) 100%);
+  }
+  .flora.top{top:0;}
+  .flora.bottom{bottom:0; transform:translateX(-50%) scaleY(-1);}
+  .flora.soft{opacity:.55;}
+
+  /* ---------------------------------------------------------------
+     Type
+     --------------------------------------------------------------- */
+  .eyebrow{
+    margin:0;
+    font-size:clamp(11px, 3.1vw, 13px);
+    letter-spacing:.42em; text-transform:uppercase;
+    color:var(--ink-soft);
+    text-indent:.42em;
+  }
+  .names{
+    margin:.12em 0 0;
+    font-family:var(--script);
+    font-weight:400;
+    font-size:clamp(46px, 15vw, 88px);
+    line-height:1.08;
+    color:var(--ink);
+  }
+  .names .amp{display:block; font-size:.62em; margin:-.1em 0;}
+  .stamp{
+    margin:0;
+    font-size:clamp(13px, 3.6vw, 16px);
+    letter-spacing:.24em; text-transform:uppercase;
+    color:var(--ink);
+    font-variant-numeric:lining-nums tabular-nums;
+  }
+  /* a place name, set in the serif — the script face is kept for the couple */
+  .venue{
+    margin:0;
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(20px, 6vw, 30px);
+    line-height:1.45;
+    letter-spacing:.16em; text-transform:uppercase; text-indent:.16em;
+    color:var(--ink);
+    text-wrap:balance;
+  }
+  .verse{
+    margin:0;
+    font-style:italic;
+    font-size:clamp(14px, 3.8vw, 16px);
+    line-height:1.85;
+    color:var(--ink-soft);
+  }
+  .body{
+    margin:0;
+    font-size:clamp(15px, 4vw, 17px);
+    line-height:2;
+    color:var(--ink);
+    text-wrap:pretty;
+  }
+  .label{
+    margin:0;
+    font-size:clamp(10.5px, 2.9vw, 12px);
+    letter-spacing:.34em; text-transform:uppercase;
+    color:var(--ink-soft);
+    text-indent:.34em;
+  }
+  .arabic{
+    font-family:var(--arabic);
+    direction:rtl;
+    line-height:1.9;
+    color:var(--ink);
+  }
+  .salam{
+    margin:0;
+    font-size:clamp(26px, 8.5vw, 44px);
+  }
+  .bismillah{
+    margin:0 0 1.2em;
+    font-size:clamp(22px, 7vw, 34px);
+  }
+
+  .stack{display:flex; flex-direction:column; align-items:center;}
+  .stack.s1{gap:.55em;} .stack.s2{gap:1.4em;} .stack.s3{gap:2.4em;}
+
+  /* a hairline broken by a diamond */
+  .rule{
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    width:min(210px, 64%); margin:0 auto;
+  }
+  .rule::before, .rule::after{content:""; height:1px; flex:1;}
+  .rule::before{background:linear-gradient(90deg, rgba(194,160,99,0), rgba(194,160,99,.85));}
+  .rule::after{background:linear-gradient(270deg, rgba(194,160,99,0), rgba(194,160,99,.85));}
+  .rule i{
+    width:6px; height:6px; flex:none;
+    border:1px solid rgba(194,160,99,.9);
+    transform:rotate(45deg);
+  }
+  .rule i + i{margin-left:4px;}
+
+  /* ---------------------------------------------------------------
+     Cover cartouche
+     --------------------------------------------------------------- */
+  .cartouche{position:relative; width:100%; padding:clamp(52px, 13vw, 78px) clamp(34px, 11vw, 58px);}
+  .cartouche .eyebrow{font-size:clamp(9.5px, 2.7vw, 12px); letter-spacing:.34em; text-indent:.34em;}
+  .cartouche svg{position:absolute; inset:0; width:100%; height:100%; z-index:0;}
+  .cartouche .stack{position:relative; z-index:1;}
+
+  /* ---------------------------------------------------------------
+     Countdown — four numerals over hairlines
+     --------------------------------------------------------------- */
+  .clock{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:clamp(4px, 2.4vw, 18px);
+    width:100%; margin:0;
+  }
+  .clock div{display:flex; flex-direction:column; align-items:center;}
+  .clock dd{
+    order:1; margin:0;
+    font-size:clamp(34px, 12vw, 58px);
+    line-height:1;
+    color:var(--ink);
+    font-variant-numeric:lining-nums tabular-nums;
+  }
+  .clock dt{
+    order:2; width:100%;
+    margin-top:.6em; padding-top:.6em;
+    border-top:1px solid rgba(194,160,99,.55);
+    font-size:clamp(8.5px, 2.4vw, 10px);
+    letter-spacing:.26em; text-transform:uppercase;
+    color:var(--ink-soft);
+    text-indent:.26em;
+  }
+
+  /* ---------------------------------------------------------------
+     Buttons
+     --------------------------------------------------------------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    min-height:46px;
+    padding:12px 24px;
+    font-family:var(--serif);
+    font-size:clamp(11px, 3vw, 12.5px);
+    letter-spacing:.24em; text-transform:uppercase;
+    text-indent:.24em;
+    color:var(--ink);
+    text-decoration:none;
+    background:rgba(255,255,255,.62);
+    border:1px solid rgba(194,160,99,.65);
+    cursor:pointer;
+    transition:background .25s ease, border-color .25s ease, transform .25s ease;
+  }
+  .btn:hover{background:#fff; border-color:var(--gold); transform:translateY(-1px);}
+  .btn:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .btn svg{width:15px; height:15px; flex:none;}
+  .btns{display:flex; flex-wrap:wrap; gap:12px; justify-content:center;}
+
+  /* contact cards */
+  .folk{
+    display:flex; flex-direction:column; gap:14px;
+    width:100%; margin:0; padding:0; list-style:none;
+  }
+  .folk li{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:14px 16px;
+    background:rgba(255,255,255,.55);
+    border:1px solid rgba(194,160,99,.4);
+    text-align:left;
+  }
+  .folk .who{display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .folk .nama{font-size:clamp(15px,4vw,17px); color:var(--ink); line-height:1.3;}
+  .folk .peranan{
+    font-size:9.5px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--ink-soft); text-indent:.24em;
+  }
+  .folk .taps{display:flex; gap:8px; flex:none;}
+  .folk .tap{
+    display:grid; place-items:center;
+    width:40px; height:40px;
+    color:var(--ink);
+    border:1px solid rgba(194,160,99,.55);
+    background:rgba(255,255,255,.6);
+    border-radius:50%;
+    text-decoration:none;
+    transition:background .2s ease, color .2s ease;
+  }
+  .folk .tap:hover{background:#fff;}
+  .folk .tap:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .folk .tap svg{width:16px; height:16px;}
+
+  /* scroll cue on the cover */
+  .cue{
+    position:absolute; left:50%; transform:translateX(-50%);
+    bottom:calc(14px + env(safe-area-inset-bottom, 0px));
+    display:flex; flex-direction:column; align-items:center; gap:5px;
+    padding:8px 12px; border:0; background:none; cursor:pointer;
+    font-family:var(--serif);
+    font-size:9.5px; letter-spacing:.3em; text-transform:uppercase; text-indent:.3em;
+    color:var(--ink-soft);
+    z-index:3;
+    transition:opacity .6s ease;
+    /* the cue sits over the flowers, so it carries its own paper halo */
+    text-shadow:0 0 9px var(--paper), 0 0 16px var(--paper), 0 0 24px var(--paper);
+  }
+  .cue svg{filter:drop-shadow(0 0 6px var(--paper)) drop-shadow(0 0 12px var(--paper));}
+  .cue svg{width:14px; height:14px;}
+  .cue:focus-visible{outline:1px solid var(--gold); outline-offset:4px;}
+  @media (prefers-reduced-motion:no-preference){
+    .cue svg{animation:nudge 2.4s ease-in-out infinite;}
+    @keyframes nudge{0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)}}
+  }
+  .cue.gone{opacity:0; pointer-events:none;}
+
+  /* music toggle, shown only once sound is actually playing */
+  .sound{
+    position:fixed; z-index:11;
+    top:calc(14px + env(safe-area-inset-top, 0px)); right:14px;
+    width:40px; height:40px;
+    display:grid; place-items:center;
+    color:var(--ink-soft);
+    background:rgba(255,255,255,.62);
+    border:1px solid rgba(194,160,99,.5);
+    border-radius:50%;
+    cursor:pointer;
+    opacity:0; pointer-events:none;
+    transition:opacity .8s ease, background .25s ease, color .25s ease;
+  }
+  .playing .sound{opacity:1; pointer-events:auto;}
+  .sound:hover{background:#fff; color:var(--ink);}
+  .sound:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .sound svg{width:18px; height:18px;}
+  .sound.muted .wave{opacity:.18;}
+
+  /* sections rise gently as they come into view */
+  .reveal{opacity:0; transform:translateY(18px);}
+  .reveal.in{opacity:1; transform:none; transition:opacity 1.1s ease, transform 1.1s cubic-bezier(.22,.86,.26,1);}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{transform:none;}
+    .reveal.in{transition:opacity .9s ease;}
+  }
+  .no-js .reveal{opacity:1; transform:none;}
+</style>
+</head>
+
+<body>
+<canvas id="flutter" aria-hidden="true"></canvas>
+
+<button class="sound" id="sound" type="button" aria-label="Senyapkan muzik" aria-pressed="false">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M4 9v6h3l5 4V5L7 9H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+    <path class="wave" d="M16 9.5a3.5 3.5 0 0 1 0 5M18.5 7a7 7 0 0 1 0 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<!-- ============================================================
+     Botanical symbols, reused across every frame on the page.
+     ============================================================ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- softens the colour washes into something like bled watercolour -->
+    <filter id="bleed" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+
+    <!-- a single petal, tip upward; every flower below is this rotated -->
+    <symbol id="cosmos" viewBox="-13 -13 26 26">
+      <g>
+        <path d="M0 0 C-4.2 -3 -4.8 -8.4 0 -11.6 C4.8 -8.4 4.2 -3 0 0 Z"/>
+        <path d="M0 0 C-4.2 -3 -4.8 -8.4 0 -11.6 C4.8 -8.4 4.2 -3 0 0 Z" transform="rotate(72)"/>
+        <path d="M0 0 C-4.2 -3 -4.8 -8.4 0 -11.6 C4.8 -8.4 4.2 -3 0 0 Z" transform="rotate(144)"/>
+        <path d="M0 0 C-4.2 -3 -4.8 -8.4 0 -11.6 C4.8 -8.4 4.2 -3 0 0 Z" transform="rotate(216)"/>
+        <path d="M0 0 C-4.2 -3 -4.8 -8.4 0 -11.6 C4.8 -8.4 4.2 -3 0 0 Z" transform="rotate(288)"/>
+      </g>
+      <circle cx="0" cy="0" r="2.2" fill="#E9CB8E"/>
+      <circle cx="0" cy="0" r="1" fill="#D8B269"/>
+    </symbol>
+
+    <!-- narrower, many-petalled, for variety in the drift -->
+    <symbol id="daisy" viewBox="-12 -12 24 24">
+      <g>
+        <path d="M0 0 C-2.2 -2.6 -2.5 -7 0 -10.4 C2.5 -7 2.2 -2.6 0 0 Z"/>
+        <path d="M0 0 C-2.2 -2.6 -2.5 -7 0 -10.4 C2.5 -7 2.2 -2.6 0 0 Z" transform="rotate(45)"/>
+        <path d="M0 0 C-2.2 -2.6 -2.5 -7 0 -10.4 C2.5 -7 2.2 -2.6 0 0 Z" transform="rotate(90)"/>
+        <path d="M0 0 C-2.2 -2.6 -2.5 -7 0 -10.4 C2.5 -7 2.2 -2.6 0 0 Z" transform="rotate(135)"/>
+        <path d="M0 0 C-2.2 -2.6 -2.5 -7 0 -10.4 C2.5 -7 2.2 -2.6 0 0 Z" transform="rotate(180)"/>
+        <path d="M0 0 C-2.2 -2.6 -2.5 -7 0 -10.4 C2.5 -7 2.2 -2.6 0 0 Z" transform="rotate(225)"/>
+        <path d="M0 0 C-2.2 -2.6 -2.5 -7 0 -10.4 C2.5 -7 2.2 -2.6 0 0 Z" transform="rotate(270)"/>
+        <path d="M0 0 C-2.2 -2.6 -2.5 -7 0 -10.4 C2.5 -7 2.2 -2.6 0 0 Z" transform="rotate(315)"/>
+      </g>
+      <circle cx="0" cy="0" r="1.9" fill="#E9CB8E"/>
+    </symbol>
+
+    <!-- a closed bud on a short neck -->
+    <symbol id="bud" viewBox="-6 -11 12 22">
+      <path d="M0 10 C-1 4 -1 0 0 -2" stroke="#9BAC8E" stroke-width=".9" fill="none" stroke-linecap="round"/>
+      <path d="M0 -1 C-3.4 -4 -3.4 -7.4 0 -10.4 C3.4 -7.4 3.4 -4 0 -1 Z"/>
+    </symbol>
+
+    <symbol id="sprig" viewBox="-14 -20 28 40">
+      <path d="M0 19 C0 8 0 -4 0 -19" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+      <g fill="currentColor" opacity=".85">
+        <ellipse cx="-4.6" cy="9" rx="4.4" ry="2" transform="rotate(-28 -4.6 9)"/>
+        <ellipse cx="4.6" cy="4.5" rx="4.4" ry="2" transform="rotate(28 4.6 4.5)"/>
+        <ellipse cx="-4.4" cy="-0.5" rx="4.2" ry="1.9" transform="rotate(-30 -4.4 -0.5)"/>
+        <ellipse cx="4.2" cy="-5.4" rx="4" ry="1.8" transform="rotate(30 4.2 -5.4)"/>
+        <ellipse cx="-3.4" cy="-10.4" rx="3.4" ry="1.6" transform="rotate(-34 -3.4 -10.4)"/>
+        <ellipse cx="2.6" cy="-15" rx="2.8" ry="1.4" transform="rotate(34 2.6 -15)"/>
+      </g>
+    </symbol>
+
+    <symbol id="wisp" viewBox="-10 -18 20 36">
+      <path d="M0 17 C-1 6 1 -6 0 -17" fill="none" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/>
+      <g fill="currentColor">
+        <circle cx="-2.6" cy="8" r="1.5"/><circle cx="2.8" cy="3.4" r="1.6"/>
+        <circle cx="-2.4" cy="-1.6" r="1.5"/><circle cx="2.4" cy="-6.6" r="1.4"/>
+        <circle cx="-1.8" cy="-11.4" r="1.2"/><circle cx="1" cy="-15.6" r="1"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+
+  <!-- ========================== COVER ========================== -->
+  <section class="sheet" id="cover">
+    <svg class="flora top" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+    <svg class="flora bottom" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+
+    <div class="inner">
+      <div class="cartouche">
+        <svg viewBox="0 0 400 560" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <radialGradient id="cartFill" cx="50%" cy="42%" r="70%">
+              <stop offset="0%" stop-color="#FDF2F3"/>
+              <stop offset="62%" stop-color="#F8E5E8"/>
+              <stop offset="100%" stop-color="#F1D6DC"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="200" cy="280" rx="196" ry="276" fill="url(#cartFill)"/>
+          <ellipse cx="200" cy="280" rx="196" ry="276" fill="none" stroke="#E3B9C3" stroke-width="1.4"/>
+          <ellipse cx="200" cy="280" rx="185" ry="265" fill="none" stroke="#C2A063" stroke-width=".7" opacity=".55"/>
+        </svg>
+
+        <div class="stack s2">
+          <p class="eyebrow" data-f="majlis">Majlis Pertunangan</p>
+          <h1 class="names"><span data-f="nama1">Ammar</span><span class="amp">&amp;</span><span data-f="nama2">Atiqah</span></h1>
+          <div class="rule" aria-hidden="true"><i></i></div>
+          <p class="stamp" data-f="coverTarikh">SABTU · 7 NOVEMBER 2026</p>
+          <p class="verse" data-f="pantun">Dua hati satu ikatan,<br>moga berkekalan hingga ke syurga.</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="cue" id="cue" type="button">
+      Tatal
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </section>
+
+  <!-- ========================== SALAM ========================== -->
+  <section class="sheet" id="salam">
+    <svg class="flora top soft" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+    <svg class="flora bottom soft" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+
+    <div class="inner stack s2 reveal">
+      <p class="arabic salam">ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</p>
+      <div class="rule" aria-hidden="true"><i></i></div>
+      <p class="verse">Dengan nama Allah yang Maha Pengasih lagi Maha Penyayang.</p>
+    </div>
+  </section>
+
+  <!-- ======================== JEMPUTAN ========================= -->
+  <section class="sheet" id="jemputan">
+    <svg class="flora top soft" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+
+    <div class="inner stack s3 reveal">
+      <div class="stack s2">
+        <p class="body" data-f="mukadimah">Dengan penuh rasa kesyukuran ke hadrat Allah SWT, kami menjemput Dato' / Datin / Tuan / Puan / Encik / Cik sekeluarga ke majlis pertunangan anakanda kami:</p>
+        <h2 class="names"><span data-f="nama1">Ammar</span><span class="amp">&amp;</span><span data-f="nama2">Atiqah</span></h2>
+      </div>
+
+      <div class="rule" aria-hidden="true"><i></i></div>
+
+      <div class="stack s2">
+        <div class="stack s1">
+          <p class="label">Pada</p>
+          <p class="stamp" data-f="tarikhPenuh">SABTU · 7 NOVEMBER 2026</p>
+          <p class="stamp" data-f="masa">2:00 PETANG</p>
+        </div>
+        <div class="stack s1">
+          <p class="label">Bertempat di</p>
+          <p class="stamp" data-f="tempat">[ NAMA TEMPAT ]</p>
+          <p class="verse" data-f="alamat">[ alamat penuh ]</p>
+        </div>
+      </div>
+
+      <p class="verse" data-f="tuanRumah">[ nama tuan rumah ]</p>
+    </div>
+  </section>
+
+  <!-- ======================== COUNTDOWN ======================== -->
+  <section class="sheet" id="detik">
+    <svg class="flora bottom soft" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+
+    <div class="inner stack s2 reveal">
+      <p class="label">Menghitung hari</p>
+      <dl class="clock" id="clock" aria-live="off">
+        <div><dt>Hari</dt><dd id="cdD">—</dd></div>
+        <div><dt>Jam</dt><dd id="cdH">—</dd></div>
+        <div><dt>Minit</dt><dd id="cdM">—</dd></div>
+        <div><dt>Saat</dt><dd id="cdS">—</dd></div>
+      </dl>
+      <p class="verse" id="cdNote" hidden>Alhamdulillah — hari yang dinanti telah tiba.</p>
+    </div>
+  </section>
+
+  <!-- ========================= LOKASI ========================== -->
+  <section class="sheet" id="lokasi">
+    <svg class="flora bottom soft" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+
+    <div class="inner stack s2 reveal">
+      <p class="label">Lokasi</p>
+      <h2 class="venue" data-f="tempat">[ NAMA TEMPAT ]</h2>
+      <p class="verse" data-f="alamat">[ alamat penuh ]</p>
+      <div class="rule" aria-hidden="true"><i></i></div>
+      <div class="btns">
+        <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+            <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.3"/>
+          </svg>
+          Google Maps
+        </a>
+        <a class="btn" id="wazeBtn" href="#" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 11l18-7-7 18-2.5-8L3 11z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+          </svg>
+          Waze
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== HUBUNGI ========================== -->
+  <section class="sheet" id="hubungi">
+    <svg class="flora top soft" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+
+    <div class="inner stack s2 reveal">
+      <p class="label">Hubungi</p>
+      <p class="verse">Sebarang pertanyaan, hubungi kami:</p>
+      <ul class="folk" id="folk"></ul>
+    </div>
+  </section>
+
+  <!-- ========================== DOA ============================ -->
+  <section class="sheet" id="doa">
+    <svg class="flora top" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+    <svg class="flora bottom" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
+
+    <div class="inner reveal">
+      <div class="cartouche">
+        <svg viewBox="0 0 400 560" preserveAspectRatio="none" aria-hidden="true">
+          <ellipse cx="200" cy="280" rx="196" ry="276" fill="url(#cartFill)"/>
+          <ellipse cx="200" cy="280" rx="196" ry="276" fill="none" stroke="#E3B9C3" stroke-width="1.4"/>
+          <ellipse cx="200" cy="280" rx="185" ry="265" fill="none" stroke="#C2A063" stroke-width=".7" opacity=".55"/>
+        </svg>
+        <div class="stack s2">
+          <p class="arabic bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+          <p class="verse">Ya Allah, rahmatilah pertunangan ini dan limpahkanlah keberkatan-Mu kepada pasangan yang dikasihi ini.</p>
+          <p class="verse">Teguhkanlah iman dan hati mereka, peliharalah mereka daripada segala ujian dan gangguan, dan permudahkanlah perjalanan mereka menuju hari perkahwinan yang diberkati.</p>
+          <p class="verse">Jadikanlah ikatan ini permulaan yang penuh rahmat dan kasih sayang.</p>
+          <div class="rule" aria-hidden="true"><i></i></div>
+          <p class="verse">Aamiin Ya Rabbal Alamin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ==============================================================
+     EVERYTHING YOU NEED TO EDIT LIVES IN THIS ONE BLOCK.
+     Change a value here and it updates everywhere on the page.
+     ============================================================== */
+  var INVITE = {
+    majlis:   'Majlis Pertunangan',
+    nama1:    'Ammar',
+    nama2:    'Atiqah',
+
+    /* ---- shown on the cover ---- */
+    coverTarikh: 'SABTU · 7 NOVEMBER 2026',
+
+    /* ISI DI SINI — ganti dengan pantun/kata-kata pilihan anda.
+       Use <br> for a line break. */
+    pantun:   'Dua hati satu ikatan,<br>moga berkekalan hingga ke jinjang pelamin.',
+
+    /* ---- shown in the jemputan section ---- */
+    mukadimah: 'Dengan penuh rasa kesyukuran ke hadrat Allah SWT, kami menjemput ' +
+               'Dato’ / Datin / Tuan / Puan / Encik / Cik sekeluarga ke majlis ' +
+               'pertunangan anakanda kami:',
+    tarikhPenuh: 'SABTU · 7 NOVEMBER 2026',
+
+    /* ISI DI SINI — tambah masa tamat jika perlu, cth '2:00 – 5:00 PETANG' */
+    masa:     '2:00 PETANG',
+
+    /* ISI DI SINI — nama tempat, cth 'Kediaman Pihak Perempuan' atau nama dewan */
+    tempat:   '[ NAMA TEMPAT ]',
+
+    alamat:   'No. 1, Jalan BLS 3, Taman Bukit Larang Sentosa,<br>75460 Telok Mas, Melaka',
+
+    /* ISI DI SINI — baris tuan rumah, cth 'Tn. Hj. … & Pn. Hjh. …' */
+    tuanRumah:'[ NAMA TUAN RUMAH ]',
+
+    /* the countdown runs to this moment, Malaysian time (+08:00) */
+    masaMajlis: '2026-11-07T14:00:00+08:00',
+
+    /* ISI DI SINI — tampal pautan kongsi dari aplikasi.
+       Biarkan kosong ('') untuk menyembunyikan butang berkenaan. */
+    maps:     '#link_here',
+    waze:     '',
+
+    /* ISI DI SINI — nama, peranan dan nombor telefon.
+       Nombor kosong = tiada butang panggil/WhatsApp.
+       Senarai kosong [] = seksyen Hubungi hilang terus. */
+    hubungi: [
+      {nama: '[ NAMA ]', peranan: '[ Peranan ]', tel: ''},
+      {nama: '[ NAMA ]', peranan: '[ Peranan ]', tel: ''}
+    ],
+
+    /* ISI DI SINI — letak fail lagu di folder ini dan namakannya, cth 'songs.mp3'.
+       Kosong = tiada muzik, dan butang senyap turut hilang. */
+    lagu: ''
+  };
+  /* ============================ end ============================= */
+
+  var $  = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- pour the content into the page ---------- */
+  $$('[data-f]').forEach(function(el){
+    var v = INVITE[el.getAttribute('data-f')];
+    if(v === undefined || v === null) return;
+    if(/<br>|<em>|<strong>/.test(v)) el.innerHTML = v; else el.textContent = v;
+  });
+  document.title = INVITE.nama1 + ' & ' + INVITE.nama2;
+
+  /* ---------- botanical frames ---------- */
+  /* Each frame is composed here rather than written out by hand: the symbols
+     in <defs> get scattered along an arc with a seeded shuffle, so every frame
+     is a different bouquet but identical on every visit. */
+  var PALETTE = ['#F2B9C6', '#E7A0B4', '#F6D3DA', '#D9AFD1', '#C4B0D8', '#F4C9AE'];
+  var LEAFY   = ['#A3B394', '#B7C4A8', '#8FA383'];
+
+  function seeded(seed){
+    return function(){
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      return seed / 0x7fffffff;
+    };
+  }
+
+  var BOX = {
+    cosmos: [-13, -13, 26, 26],
+    daisy:  [-12, -12, 24, 24],
+    bud:    [-6, -11, 12, 22],
+    sprig:  [-14, -20, 28, 40],
+    wisp:   [-10, -18, 20, 36]
+  };
+
+  function place(sym, x, y, rot, scale, fill, op){
+    var b = BOX[sym];
+    return '<use href="#' + sym + '" x="' + b[0] + '" y="' + b[1] + '" width="' + b[2] + '" height="' + b[3] + '" ' +
+           (sym === 'sprig' || sym === 'wisp' ? 'color="' : 'fill="') + fill + '" opacity="' + op.toFixed(2) + '" ' +
+           'transform="translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ') rotate(' + rot.toFixed(1) + ') scale(' + scale.toFixed(2) + ')"/>';
+  }
+
+  function bouquet(svg, seed){
+    var rnd = seeded(seed);
+    var W = 760, H = 250;
+    var parts = [];
+
+    /* Everything hangs from the top edge and thins out downward, so the frame
+       reads as a border rather than flowers floating in the middle. The bottom
+       copy is the same drawing flipped, which turns it into a meadow. */
+    var depth = function(bias){ return Math.pow(rnd(), bias) * H; };
+
+    /* blurred colour washes, the wet-paper layer */
+    for(var w = 0; w < 9; w++){
+      parts.push('<circle cx="' + (rnd() * W).toFixed(0) + '" cy="' + depth(2.1).toFixed(0) +
+                 '" r="' + (50 + rnd() * 90).toFixed(0) + '" fill="' + PALETTE[(w + seed) % PALETTE.length] +
+                 '" opacity="' + (0.12 + rnd() * 0.12).toFixed(3) + '" filter="url(#bleed)"/>');
+    }
+
+    /* stems, hanging down from the edge */
+    for(var g = 0; g < 26; g++){
+      var gx = (g / 25) * W + (rnd() - .5) * 52;
+      var gy = depth(1.9) * .8;
+      parts.push(place(
+        rnd() > .42 ? 'sprig' : 'wisp',
+        gx, gy,
+        180 + (rnd() - .5) * 74,              /* pointing downward, fanned out */
+        0.7 + rnd() * 0.95,
+        LEAFY[g % LEAFY.length],
+        0.5 + rnd() * 0.4
+      ));
+    }
+
+    /* blooms, densest right at the edge */
+    for(var b = 0; b < 30; b++){
+      var bx = (b / 29) * W + (rnd() - .5) * 56;
+      var by = depth(2.2);
+      var r = rnd();
+      var sym = r > .62 ? 'cosmos' : (r > .3 ? 'daisy' : 'bud');
+      parts.push(place(
+        sym, bx, by,
+        rnd() * 360,
+        0.5 + rnd() * 0.85,
+        PALETTE[b % PALETTE.length],
+        0.55 + rnd() * 0.4
+      ));
+    }
+
+    svg.innerHTML = parts.join('');
+  }
+
+  $$('.flora').forEach(function(svg, i){ bouquet(svg, 7 + i * 13); });
+
+  /* ---------- links ---------- */
+  function wire(btn, url){
+    if(!btn) return;
+    if(url){ btn.href = url; }
+    else{ btn.parentNode.removeChild(btn); }
+  }
+  wire($('#mapBtn'), INVITE.maps);
+  wire($('#wazeBtn'), INVITE.waze);
+
+  /* ---------- hubungi ---------- */
+  function telHref(t){ return 'tel:' + t.replace(/[^0-9+]/g, ''); }
+  function waHref(t){
+    var digits = t.replace(/[^0-9]/g, '');
+    if(digits.charAt(0) === '0') digits = '6' + digits;      /* 012… → 6012… */
+    return 'https://wa.me/' + digits;
+  }
+  var folk = $('#folk');
+  var people = (INVITE.hubungi || []).filter(function(p){ return p && p.nama; });
+  if(!people.length){
+    var sec = $('#hubungi'); if(sec) sec.parentNode.removeChild(sec);
+  }else{
+    people.forEach(function(p){
+      var li = document.createElement('li');
+      var who = document.createElement('div');
+      who.className = 'who';
+      var n = document.createElement('span'); n.className = 'nama'; n.textContent = p.nama;
+      var r = document.createElement('span'); r.className = 'peranan'; r.textContent = p.peranan || '';
+      who.appendChild(n); who.appendChild(r);
+      li.appendChild(who);
+
+      if(p.tel){
+        var taps = document.createElement('div');
+        taps.className = 'taps';
+        taps.innerHTML =
+          '<a class="tap" href="' + telHref(p.tel) + '" aria-label="Telefon ' + p.nama + '">' +
+            '<svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>' +
+          '</a>' +
+          '<a class="tap" href="' + waHref(p.tel) + '" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ' + p.nama + '">' +
+            '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l.8-1.4-2-1-.9 1a5 5 0 0 1-2-2l1-.9-1-2-1.4.8z" fill="currentColor"/></svg>' +
+          '</a>';
+        li.appendChild(taps);
+      }
+      folk.appendChild(li);
+    });
+  }
+
+  /* ---------- countdown ---------- */
+  var TARGET = new Date(INVITE.masaMajlis).getTime();
+  var cd = {d: $('#cdD'), h: $('#cdH'), m: $('#cdM'), s: $('#cdS')};
+  function pad(n){ return n < 10 ? '0' + n : String(n); }
+  function tick(){
+    if(isNaN(TARGET)) return;
+    var diff = TARGET - Date.now();
+    if(diff <= 0){
+      $('#clock').hidden = true;
+      $('#cdNote').hidden = false;
+      clearInterval(ticking);
+      return;
+    }
+    var t = Math.floor(diff / 1000);
+    var d = Math.floor(t / 86400); t -= d * 86400;
+    var h = Math.floor(t / 3600);  t -= h * 3600;
+    var m = Math.floor(t / 60);    t -= m * 60;
+    cd.d.textContent = String(d);
+    cd.h.textContent = pad(h);
+    cd.m.textContent = pad(m);
+    cd.s.textContent = pad(t);
+  }
+  tick();
+  var ticking = setInterval(tick, 1000);
+
+  /* ---------- sections rise into view ---------- */
+  var revealables = $$('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {rootMargin: '0px 0px -12% 0px', threshold: .12});
+    revealables.forEach(function(el){ io.observe(el); });
+  }else{
+    revealables.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- scroll cue ---------- */
+  var cue = $('#cue');
+  cue.addEventListener('click', function(){
+    var next = $('#salam');
+    if(next) next.scrollIntoView({block: 'start'});
+  });
+  window.addEventListener('scroll', function(){
+    cue.classList.toggle('gone', window.scrollY > 60);
+  }, {passive: true});
+
+  /* ---------- butterflies ---------- */
+  var cv = $('#flutter');
+  var ctx = cv.getContext('2d');
+  var flock = [], raf = null;
+
+  function sizeCanvas(){
+    var w = window.innerWidth, h = window.innerHeight;
+    if(!w || !h) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, w < 620 ? 1.5 : 2);
+    cv.width = Math.round(w * dpr);
+    cv.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  sizeCanvas();
+  window.addEventListener('resize', sizeCanvas);
+
+  function hatch(n){
+    flock = [];
+    for(var i = 0; i < n; i++){
+      flock.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        sz: 7 + Math.random() * 7,
+        sp: 0.18 + Math.random() * 0.34,
+        drift: Math.random() * Math.PI * 2,
+        flap: Math.random() * Math.PI * 2,
+        rate: 0.13 + Math.random() * 0.1,
+        hue: Math.random() > .5 ? 'rgba(92,191,190,' : 'rgba(196,176,216,',
+        a: 0.42 + Math.random() * 0.34
+      });
+    }
+  }
+
+  function wing(b, t){
+    /* Four wings — a big forewing above, a smaller hindwing below, mirrored.
+       Their width pulses with the flap, which is what reads as a butterfly
+       rather than a pair of dots. */
+    var open = 0.22 + Math.abs(Math.sin(b.flap + t * b.rate)) * 0.78;
+    var s = b.sz;
+    ctx.save();
+    ctx.translate(b.x, b.y);
+    ctx.rotate(Math.sin(b.drift + t * 0.02) * 0.5);
+
+    for(var side = -1; side <= 1; side += 2){
+      ctx.save();
+      ctx.scale(side * open, 1);
+
+      ctx.fillStyle = b.hue + b.a.toFixed(2) + ')';
+      ctx.beginPath();                                   /* forewing */
+      ctx.moveTo(0, -s * 0.12);
+      ctx.bezierCurveTo(s * 0.55, -s * 1.05, s * 1.25, -s * 0.72, s * 0.92, -s * 0.06);
+      ctx.bezierCurveTo(s * 0.72, s * 0.2, s * 0.24, s * 0.16, 0, -s * 0.12);
+      ctx.fill();
+
+      ctx.fillStyle = b.hue + (b.a * 0.82).toFixed(2) + ')';
+      ctx.beginPath();                                   /* hindwing */
+      ctx.moveTo(0, s * 0.02);
+      ctx.bezierCurveTo(s * 0.5, s * 0.22, s * 0.78, s * 0.72, s * 0.4, s * 0.86);
+      ctx.bezierCurveTo(s * 0.14, s * 0.94, 0, s * 0.5, 0, s * 0.02);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    ctx.fillStyle = 'rgba(107,90,82,' + (b.a * 0.62).toFixed(2) + ')';
+    ctx.beginPath();
+    ctx.ellipse(0, s * 0.06, s * 0.085, s * 0.52, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function frame(t){
+    var w = window.innerWidth, h = window.innerHeight;
+    ctx.clearRect(0, 0, w, h);
+    for(var i = 0; i < flock.length; i++){
+      var b = flock[i];
+      b.x += Math.cos(b.drift + t / 2400) * b.sp * 1.5;
+      b.y -= b.sp * .55;
+      b.drift += 0.004;
+      if(b.y < -20){ b.y = h + 20; b.x = Math.random() * w; }
+      if(b.x < -30) b.x = w + 30;
+      if(b.x > w + 30) b.x = -30;
+      wing(b, t / 16);
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  function flutterOn(){
+    if(reduced || raf) return;
+    hatch(window.innerWidth < 620 ? 5 : 9);
+    raf = requestAnimationFrame(frame);
+  }
+  function flutterOff(){
+    if(raf){ cancelAnimationFrame(raf); raf = null; }
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  }
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden) flutterOff(); else flutterOn();
+  });
+  flutterOn();
+
+  /* ---------- music ---------- */
+  var sound = $('#sound');
+  var song = null;
+  var GESTURES = ['pointerdown', 'mousedown', 'touchstart', 'keydown', 'scroll'];
+
+  if(INVITE.lagu){
+    song = document.createElement('audio');
+    song.src = INVITE.lagu;
+    song.loop = true;
+    song.preload = 'auto';
+    document.body.appendChild(song);
+    startSong();
+  }else{
+    sound.parentNode.removeChild(sound);
+  }
+
+  function startSong(){
+    if(!song || !song.paused) return;
+    song.volume = 0;
+    var play = song.play();
+    if(play && play.then) play.then(playing).catch(waitForGesture);
+    else playing();
+  }
+  function playing(){
+    document.body.classList.add('playing');
+    var step = 0, target = 0.7;
+    var iv = setInterval(function(){
+      step++;
+      song.volume = Math.min(target, target * step / 45);
+      if(step >= 45) clearInterval(iv);
+    }, 2500 / 45);
+  }
+  function waitForGesture(){
+    function go(){
+      GESTURES.forEach(function(t){ document.removeEventListener(t, go, true); });
+      startSong();
+    }
+    GESTURES.forEach(function(t){ document.addEventListener(t, go, true); });
+  }
+  if(sound && sound.parentNode){
+    sound.addEventListener('click', function(){
+      song.muted = !song.muted;
+      sound.classList.toggle('muted', song.muted);
+      sound.setAttribute('aria-pressed', song.muted ? 'true' : 'false');
+      sound.setAttribute('aria-label', song.muted ? 'Mainkan muzik' : 'Senyapkan muzik');
+    });
+  }
+})();
+</script>
+</body>
+</html>
