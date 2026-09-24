@@ -24,10 +24,11 @@ var INVITE = {
 | `nama1`, `nama2` | The couple, used on the cover and in the jemputan |
 | `coverTarikh` | Date as shown on the cover |
 | `pantun` | The couplet under the cover date (`<br>` for a line break) |
-| `mukadimah` | The invitation paragraph |
+| `mukadimah` | The invitation line in the arch |
 | `tarikhPenuh`, `masa` | Date and time in the details section |
 | `tempat`, `alamat` | Venue name and address |
-| `tuanRumah` | The hosts' line |
+| `bapa`, `ibu` | The parents (hosts), at the top of the arch, in capitals |
+| `namaPerempuan`, `namaLelaki` | The couple in the arch, bride first, in capitals — full names if you like |
 | `masaMajlis` | What the countdown runs to — ISO format, `+08:00` for Malaysian time |
 | `maps`, `waze` | Paste the share links. **An empty string hides that button.** |
 | `hubungi` | Contacts. **An empty list removes the whole section.** |
@@ -71,10 +72,11 @@ Search `index.html` for **`ISI DI SINI`** — every spot that needs your input i
 marked with that comment. Anything showing as `[ SOMETHING ]` on the page is a
 placeholder:
 
-- [ ] `tempat` — venue name (the address is already in)
-- [ ] `tuanRumah` — the hosts' line
+- [x] `tempat` — set to `Rumah`
+- [x] `bapa`, `ibu` — Abdul Rahman & Kasmiah
+- [ ] `namaPerempuan`, `namaLelaki` — currently the short names; add full names if wanted
 - [ ] `hubungi` — names, roles and phone numbers
-- [ ] `maps` — currently `#link_here`, paste the real Google Maps share link
+- [x] `maps` — set
 - [ ] `waze` — empty, so that button is hidden; fill it in to show it
 - [ ] `masa` — currently `2:00 PETANG`; add an end time if the majlis has one
 - [ ] `pantun` — swap in your own couplet if you'd rather
