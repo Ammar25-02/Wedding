@@ -219,8 +219,13 @@
      --------------------------------------------------------------- */
   .cartouche{position:relative; width:100%; padding:clamp(52px, 13vw, 78px) clamp(34px, 11vw, 58px);}
   .cartouche .eyebrow{font-size:clamp(9.5px, 2.7vw, 12px); letter-spacing:.34em; text-indent:.34em;}
-  .cartouche svg{position:absolute; inset:0; width:100%; height:100%; z-index:0;}
   .cartouche .stack{position:relative; z-index:1;}
+  .hashtag{
+    margin:0;
+    font-size:clamp(12px, 3.4vw, 14px);
+    letter-spacing:.18em; text-indent:.18em;
+    color:var(--gold);
+  }
 
 
   /* ---------------------------------------------------------------
@@ -749,19 +754,6 @@
 
     <div class="inner">
       <div class="cartouche">
-        <svg viewBox="0 0 400 560" preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <radialGradient id="cartFill" cx="50%" cy="42%" r="70%">
-              <stop offset="0%" stop-color="#FDF2F3"/>
-              <stop offset="62%" stop-color="#F8E5E8"/>
-              <stop offset="100%" stop-color="#F1D6DC"/>
-            </radialGradient>
-          </defs>
-          <ellipse cx="200" cy="280" rx="196" ry="276" fill="url(#cartFill)"/>
-          <ellipse cx="200" cy="280" rx="196" ry="276" fill="none" stroke="#E3B9C3" stroke-width="1.4"/>
-          <ellipse cx="200" cy="280" rx="185" ry="265" fill="none" stroke="#C2A063" stroke-width=".7" opacity=".55"/>
-        </svg>
-
         <div class="stack s2">
           <img class="crest-mark" src="logo.png" alt="Monogram Ammar &amp; Atiqah">
           <p class="eyebrow" data-f="majlis">Majlis Pertunangan</p>
@@ -769,6 +761,7 @@
           <div class="rule" aria-hidden="true"><i></i></div>
           <p class="stamp" data-f="coverTarikh">SABTU · 7 NOVEMBER 2026</p>
           <p class="verse" data-f="pantun">Dua hati satu ikatan,<br>moga berkekalan hingga ke syurga.</p>
+          <p class="hashtag" data-f="hashtag">#something</p>
         </div>
       </div>
     </div>
@@ -896,6 +889,9 @@
        Use <br> for a line break. */
     pantun:   'Dua hati satu ikatan,<br>moga berkekalan hingga ke syurga.',
 
+    /* ISI DI SINI — hashtag majlis. Kosong ('') untuk menyembunyikannya. */
+    hashtag:  '#something',
+
     /* ---- the jemputan, shown in this order ---- */
 
     /* the parents (tuan rumah), shown in capitals */
@@ -952,6 +948,7 @@
     if(v === undefined || v === null) return;
     if(/<br>|<em>|<strong>/.test(v)) el.innerHTML = v; else el.textContent = v;
   });
+  if(!INVITE.hashtag) $('.hashtag').hidden = true;
   document.title = INVITE.nama1 + ' & ' + INVITE.nama2;
 
   /* long full names get the smaller couple size */
