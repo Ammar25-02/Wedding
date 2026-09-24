@@ -9,6 +9,11 @@ live countdown.
 
 **Live:** https://ammar25-02.github.io/Wedding/
 
+**Reusing these designs for another couple?** See the [design library](docs/README.md) —
+a guide to every design built so far, working demos of the retired ones in
+`designs/`, a step-by-step for [starting a new invitation](docs/new-invitation.md),
+and the [monogram converter](tools/logo-converter.html) in `tools/`.
+
 ## Editing it
 
 Everything you'd want to change lives in one block near the top of the

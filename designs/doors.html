@@ -15,19 +15,19 @@
      --------------------------------------------------------------- */
   @font-face{
     font-family:'Pinyon Script'; font-style:normal; font-weight:400; font-display:swap;
-    src:url('fonts/pinyon.woff2') format('woff2');
+    src:url('../fonts/pinyon.woff2') format('woff2');
   }
   @font-face{
     font-family:'Cormorant Garamond'; font-style:normal; font-weight:400; font-display:swap;
-    src:url('fonts/cormorant400.woff2') format('woff2');
+    src:url('../fonts/cormorant400.woff2') format('woff2');
   }
   @font-face{
     font-family:'Cormorant Garamond'; font-style:normal; font-weight:500; font-display:swap;
-    src:url('fonts/cormorant500.woff2') format('woff2');
+    src:url('../fonts/cormorant500.woff2') format('woff2');
   }
   @font-face{
     font-family:'Amiri'; font-style:normal; font-weight:400; font-display:swap;
-    src:url('fonts/amiri.woff2') format('woff2');
+    src:url('../fonts/amiri.woff2') format('woff2');
   }
 
   :root{
@@ -221,48 +221,6 @@
   .cartouche .eyebrow{font-size:clamp(9.5px, 2.7vw, 12px); letter-spacing:.34em; text-indent:.34em;}
   .cartouche svg{position:absolute; inset:0; width:100%; height:100%; z-index:0;}
   .cartouche .stack{position:relative; z-index:1;}
-
-
-  /* ---------------------------------------------------------------
-     The jemputan's wording: parents and couple in spaced capitals,
-     the invitation line between them
-     --------------------------------------------------------------- */
-  .parents{
-    margin:0;
-    display:flex; flex-direction:column; align-items:center;
-    font-family:var(--serif); font-weight:500;
-    font-size:clamp(14px, 4.2vw, 18px);
-    letter-spacing:.12em; text-indent:.12em; text-transform:uppercase;
-    line-height:1.55;
-    color:var(--ink);
-  }
-  .invite{
-    margin:0;
-    max-width:18em;
-    font-size:clamp(14px, 4vw, 16.5px);
-    line-height:1.85; letter-spacing:.03em;
-    color:var(--ink);
-    text-wrap:balance;
-  }
-  .couple{
-    margin:0;
-    display:flex; flex-direction:column; align-items:center; gap:.12em;
-    font-family:var(--serif); font-weight:500;
-    font-size:clamp(22px, 7vw, 32px);
-    letter-spacing:.16em; text-indent:.16em; text-transform:uppercase;
-    line-height:1.3;
-    color:var(--ink);
-    text-wrap:balance;
-  }
-  /* full names ("… BINTI …") would take three lines each at the size above;
-     set smaller and tighter they wrap to two balanced lines */
-  .couple.long{
-    font-size:clamp(17px, 5vw, 24px);
-    letter-spacing:.1em; text-indent:.1em;
-    line-height:1.4; gap:.3em;
-  }
-  .amp-caps{font-size:.78em; line-height:1.4; color:var(--ink-soft);}
-
   /* the oval narrows toward its foot, so verse there must wrap early */
   .cartouche .verse{max-width:17em; margin-left:auto; margin-right:auto; text-wrap:balance;}
 
@@ -402,216 +360,105 @@
   .crest-mark.small{width:clamp(64px, 18vw, 88px); opacity:.8;}
 
   /* ---------------------------------------------------------------
-     The envelope
-     Portrait, seen from the back. Layers, bottom to top: the inside,
-     the letter, the front pocket, the flap, and the wax stamp at the
-     flap's point. The flap swings on its own perspective, so the
-     stacking stays flat and z-index keeps working.
+     The doors
+     Two leaves hinged at the outer edges. Each carries half of the
+     monogram, so the initials part along the seam as they open.
      --------------------------------------------------------------- */
   body.sealed{overflow:hidden;}
 
-  .gate{
-    --ew:min(72vw, 296px, calc(40 * var(--vh)));
-    --eh:calc(var(--ew) * 1.34);
-    --seal:clamp(78px, calc(var(--ew) * .32), 104px);
+  .doors{
+    --logo-w:clamp(200px, 64vw, 330px);
+    --logo-h:calc(var(--logo-w) / 1.4737);   /* the logo's own proportion */
     position:fixed; inset:0; z-index:50;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding-top:calc(18 * var(--vh));        /* sit low: flap and letter rise above */
-    overflow:hidden;
-    background:
-      radial-gradient(60% 40% at 50% 58%, #FDF3F3 0%, rgba(253,243,243,0) 70%),
-      var(--paper);
+    display:flex;
+    perspective:1600px;
     cursor:pointer;
     -webkit-tap-highlight-color:transparent;
-    transition:opacity 1s ease;
   }
-  .gate:focus-visible{outline:none;}
-  .gate:focus-visible .seal{outline:1px solid var(--gold); outline-offset:8px; border-radius:50%;}
-  .gate > .env, .gate > .knock{position:relative; z-index:1;}
+  .doors:focus-visible{outline:none;}
+  .doors:focus-visible .knock span{outline:1px solid var(--gold); outline-offset:6px;}
 
-  .env{
+  .door{
     position:relative;
-    width:var(--ew); height:var(--eh);
-    transition:transform 1s cubic-bezier(.4,0,.6,1);
+    width:50%; height:100%;
+    transition:transform 2.1s cubic-bezier(.62,.02,.22,1);
+    transform-style:preserve-3d;
+    will-change:transform;
   }
-  .env > div{position:absolute; inset:0;}
+  .door.left{transform-origin:left center;}
+  .door.right{transform-origin:right center;}
+  .open .door.left{transform:rotateY(-104deg);}
+  .open .door.right{transform:rotateY(104deg);}
 
-  .env-back{
-    z-index:1; border-radius:4px;
-    background:linear-gradient(170deg, #D9B3BD 0%, #CDA2AE 60%, #C697A4 100%);
-    box-shadow:0 28px 52px -20px rgba(107,90,82,.45);
-  }
-  .env-back::after{
-    content:""; position:absolute; inset:0; border-radius:4px;
-    background:linear-gradient(180deg, rgba(107,90,82,.32), rgba(107,90,82,0) 36%);
-  }
-
-  .letter{
-    z-index:2;
-    top:auto !important; left:6% !important; right:6% !important; bottom:4% !important;
-    height:90%;
-    display:flex; flex-direction:column; align-items:center; gap:.4em;
-    padding-top:9%;
-    background:linear-gradient(180deg, #FFFDFB 0%, #FBF0F1 100%);
-    border-radius:2px;
-    box-shadow:0 10px 24px -12px rgba(107,90,82,.35);
-    transform:translateY(0);
-    transition:transform 1.2s cubic-bezier(.22,.86,.26,1);
-  }
-  .letter::before{
-    content:""; position:absolute; inset:7px;
-    border:1px solid rgba(194,160,99,.45);
-    pointer-events:none;
-  }
-  .letter-eyebrow{
-    margin:0;
-    font-size:clamp(7.5px, 2.1vw, 9.5px);
-    letter-spacing:.3em; text-transform:uppercase; text-indent:.3em;
-    color:var(--ink-soft);
-  }
-  .letter-names{
-    margin:0;
-    font-family:var(--script);
-    font-size:clamp(26px, 8vw, 38px);
-    line-height:1.05;
-    color:var(--ink);
-    text-align:center;
-  }
-  .letter-names .amp{display:block; font-size:.6em; margin:-.08em 0;}
-  .letter .rule{width:44%;}
-  .letter-date{
-    margin:0;
-    font-size:clamp(7.5px, 2.1vw, 9.5px);
-    letter-spacing:.24em; text-indent:.24em;
-    color:var(--ink);
-    font-variant-numeric:lining-nums;
-  }
-
-  .env-front{
-    z-index:3; border-radius:4px; overflow:hidden;
-    background:linear-gradient(166deg, #FBF1F2 0%, #F4E1E5 55%, #E9CDD4 100%);
-    box-shadow:0 -1px 5px rgba(107,90,82,.12);
-  }
-  .env-front::before{      /* the bottom flap, folded up */
-    content:""; position:absolute; inset:0;
-    clip-path:polygon(0 100%, 50% 44%, 100% 100%);
-    background:linear-gradient(0deg, rgba(255,255,255,.52), rgba(255,255,255,.1));
-  }
-  .side{position:absolute; top:0; bottom:0; width:52%;}
-  .side.l{left:0;  clip-path:polygon(0 0, 100% 50%, 0 100%);
-          background:linear-gradient(90deg, rgba(214,178,188,.55), rgba(214,178,188,0));}
-  .side.r{right:0; clip-path:polygon(100% 0, 0 50%, 100% 100%);
-          background:linear-gradient(270deg, rgba(214,178,188,.55), rgba(214,178,188,0));}
-  .env-date{
-    position:absolute; left:0; right:0; bottom:8%;
-    margin:0; text-align:center;
-    font-size:clamp(7.5px, 2.3vw, 9.5px);
-    letter-spacing:.34em; text-indent:.34em;
-    color:var(--sage);
-    font-variant-numeric:lining-nums;
-  }
-
-  .flap-hold{z-index:5; perspective:1200px;}
-  .flap{
-    position:absolute; top:0; left:0;
-    width:100%; height:50%;                 /* its point lands at the centre */
-    transform-origin:50% 0;
-    transform:rotateX(0deg);
-    transition:transform 1s cubic-bezier(.6,.02,.28,1);
-    clip-path:polygon(0 0, 100% 0, 50% 100%);
-    background:linear-gradient(186deg, #FCF3F4 0%, #F4E1E5 56%, #E6C8D0 100%);
-    filter:drop-shadow(0 7px 9px rgba(107,90,82,.18));
-  }
-  .opening .flap{transform:rotateX(-172deg); filter:none;}
-  .flap-behind{z-index:0 !important;}
-
-  /* ---- the wax stamp, pressed with the monogram ---- */
-  .seal{
-    position:absolute; z-index:6;
-    left:50%; top:50%;
-    width:var(--seal); height:var(--seal);
-    margin:calc(var(--seal) / -2) 0 0 calc(var(--seal) / -2);
-    display:block;
-  }
-  .seal > span{position:absolute; display:block; border-radius:50%;}
-  .seal-rim{              /* the wax that spread past the stamp */
-    inset:-9%;
-    border-radius:48% 52% 51% 49% / 50% 47% 53% 50% !important;
-    background:radial-gradient(closest-side, rgba(128,94,104,.5), rgba(128,94,104,0) 76%);
-    transition:opacity .45s ease;
-  }
-  .seal-face, .seal-half{
-    inset:0;
+  .leaf{
+    position:absolute; inset:0;
+    overflow:hidden;
     background:
-      radial-gradient(40% 34% at 33% 27%, rgba(201,165,175,.85) 0%, rgba(201,165,175,0) 62%),
-      radial-gradient(118% 118% at 64% 80%, #624550 0%, #876570 60%);
-    box-shadow:
-      0 6px 12px -3px rgba(80,50,60,.5),
-      inset 0 0 0 4px rgba(255,255,255,.07),
-      inset 0 0 0 5px rgba(60,35,45,.28),
-      inset 0 -3px 6px rgba(40,20,28,.35);
+      radial-gradient(120% 70% at 50% 45%, #FDF6F4 0%, #F7E8E8 55%, #EFD9DC 100%);
+    backface-visibility:hidden;
   }
-  /* the monogram, pressed in: pale, with a light and shadow edge */
-  .seal img{
-    position:absolute; left:50%; top:52%;
-    width:68%; height:auto; max-width:none;
-    transform:translate(-50%, -50%);
-    filter:brightness(0) invert(1) sepia(.18)
-           drop-shadow(0 -1px 0 rgba(58,32,42,.55))
-           drop-shadow(0 1px 0 rgba(255,255,255,.18));
-    opacity:.88;
-  }
-  /* while sealed only the whole face shows; the halves exist for the crack */
-  .seal-half{opacity:0;}
-  .seal-half.l{clip-path:polygon(0 0, 50% 0, 50% 100%, 0 100%);}
-  .seal-half.r{clip-path:polygon(50% 0, 100% 0, 100% 100%, 50% 100%);}
-  .broken .seal-face{opacity:0;}
-  .broken .seal-rim{opacity:0;}
-  /* the seal first cracks open a little, holds, then the halves fall away —
-     opacity only goes at the very end, so the split itself is seen */
-  .broken .seal-half.l{animation:crackL 1.1s linear forwards;}
-  .broken .seal-half.r{animation:crackR 1.1s linear forwards;}
-  @keyframes crackL{
-    0%  {opacity:1; transform:none; animation-timing-function:cubic-bezier(.2,.8,.3,1);}
-    22% {opacity:1; transform:translate(-7%, 1%) rotate(-5deg); animation-timing-function:cubic-bezier(.5,0,.8,.4);}
-    78% {opacity:1;}
-    100%{opacity:0; transform:translate(-48%, 70%) rotate(-34deg);}
-  }
-  @keyframes crackR{
-    0%  {opacity:1; transform:none; animation-timing-function:cubic-bezier(.2,.8,.3,1);}
-    22% {opacity:1; transform:translate(7%, 1%) rotate(5deg); animation-timing-function:cubic-bezier(.5,0,.8,.4);}
-    78% {opacity:1;}
-    100%{opacity:0; transform:translate(48%, 76%) rotate(30deg);}
+  /* a thin shadow at the seam, so the two leaves read as separate doors */
+  .left .leaf{box-shadow:inset -10px 0 18px -12px rgba(107,90,82,.35);}
+  .right .leaf{box-shadow:inset 10px 0 18px -12px rgba(107,90,82,.35);}
+  .leaf::after{            /* laid-paper texture, as on the page beneath */
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.6;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
   }
 
-  .lifted .letter{transform:translateY(-52%);}
+  /* a gilded panel inset on each leaf */
+  .frame{
+    position:absolute;
+    top:clamp(22px, 5vh, 46px); bottom:clamp(22px, 5vh, 46px);
+    border:1px solid rgba(194,160,99,.55);
+    box-shadow:inset 0 0 0 5px rgba(255,255,255,.35), inset 0 0 0 6px rgba(194,160,99,.25);
+  }
+  .left .frame{left:clamp(16px, 5vw, 40px); right:14px;}
+  .right .frame{right:clamp(16px, 5vw, 40px); left:14px;}
 
-  .away{opacity:0;}
-  .away .env{transform:scale(1.05);}
-  .gone{visibility:hidden;}
+  /* half a monogram each, cut exactly at the seam */
+  .crest{
+    position:absolute; top:50%;
+    width:calc(var(--logo-w) / 2); height:var(--logo-h);
+    margin-top:calc(var(--logo-h) / -2);
+    overflow:hidden;
+  }
+  .left .crest{right:0;}
+  .right .crest{left:0;}
+  .crest img{position:absolute; top:0; width:var(--logo-w); height:var(--logo-h); max-width:none;}
+  .left .crest img{left:0;}
+  .right .crest img{right:0;}
+
+  /* a small gilt ring pull on each leaf, just off the seam */
+  .pull{
+    position:absolute; top:calc(50% + var(--logo-h) / 2 + 26px);
+    width:16px; height:16px;
+    border:1.5px solid rgba(194,160,99,.85);
+    border-radius:50%;
+  }
+  .left .pull{right:14px;}
+  .right .pull{left:14px;}
 
   .knock{
-    margin:calc(6 * var(--vh)) 0 0; text-align:center;
+    position:absolute; left:0; right:0;
+    bottom:calc(9 * var(--vh) + env(safe-area-inset-bottom, 0px));
+    margin:0; text-align:center; z-index:2;
     font-size:clamp(10px, 2.8vw, 12px);
     letter-spacing:.34em; text-transform:uppercase; text-indent:.34em;
     color:var(--ink-soft);
     transition:opacity .5s ease;
     pointer-events:none;
   }
-  .broken .knock{opacity:0;}
+  .open .knock{opacity:0;}
   @media (prefers-reduced-motion:no-preference){
     .knock span{display:inline-block; animation:breathe 3.2s ease-in-out infinite;}
     @keyframes breathe{0%,100%{opacity:.45} 50%{opacity:1}}
   }
+  .gone{visibility:hidden;}
 
-  /* reduced motion: the seal, flap and letter fade rather than move */
+  /* reduced motion: the doors part by fading rather than swinging */
   @media (prefers-reduced-motion:reduce){
-    .seal-face{transition:opacity .5s ease;}
-    .broken .seal-half.l, .broken .seal-half.r{animation:none;}
-    .flap{transition:opacity .6s ease;}
-    .opening .flap{transform:none; opacity:0;}
-    .lifted .letter{transform:none;}
-    .away .env{transform:none;}
+    .door{transition:opacity 1s ease;}
+    .open .door.left, .open .door.right{transform:none; opacity:0;}
   }
 
   .reveal{opacity:0; transform:translateY(18px);}
@@ -702,42 +549,25 @@
 </svg>
 
 <!-- ============================================================
-     The envelope. A portrait envelope sealed at its centre with a
-     wax stamp pressed with the monogram. Tapping cracks the seal,
-     opens the flap, lifts the letter, then dissolves into the page.
+     The doors. Each carries half of the monogram, cut exactly at
+     the seam, so opening them parts the initials.
      ============================================================ -->
-<div class="gate" id="gate" role="button" tabindex="0" aria-label="Buka jemputan">
-  <svg class="flora top" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
-  <svg class="flora bottom" viewBox="0 0 760 250" fill="none" aria-hidden="true"></svg>
-
-  <div class="env" id="env">
-    <div class="env-back"></div>
-
-    <div class="letter" aria-hidden="true">
-      <p class="letter-eyebrow" data-f="majlis">Majlis Pertunangan</p>
-      <p class="letter-names"><span data-f="nama1">Ammar</span><span class="amp">&amp;</span><span data-f="nama2">Atiqah</span></p>
-      <div class="rule"><i></i></div>
-      <p class="letter-date" data-f="coverTarikh">SABTU · 7 NOVEMBER 2026</p>
+<div class="doors" id="doors" role="button" tabindex="0" aria-label="Buka jemputan">
+  <div class="door left">
+    <div class="leaf">
+      <span class="frame" aria-hidden="true"></span>
+      <span class="crest"><img src="../logo.png" alt=""></span>
+      <span class="pull" aria-hidden="true"></span>
     </div>
-
-    <div class="env-front">
-      <span class="side l" aria-hidden="true"></span>
-      <span class="side r" aria-hidden="true"></span>
-      <p class="env-date">07 · 11 · 2026</p>
-    </div>
-
-    <div class="flap-hold" id="flapHold"><div class="flap"></div></div>
-
-    <!-- the stamp: one whole face while sealed; two halves for the crack -->
-    <span class="seal" aria-hidden="true">
-      <span class="seal-rim"></span>
-      <span class="seal-face"><img src="logo.png" alt=""></span>
-      <span class="seal-half l"><img src="logo.png" alt=""></span>
-      <span class="seal-half r"><img src="logo.png" alt=""></span>
-    </span>
   </div>
-
-  <p class="knock"><span>Sentuh untuk membuka</span></p>
+  <div class="door right">
+    <div class="leaf">
+      <span class="frame" aria-hidden="true"></span>
+      <span class="crest"><img src="../logo.png" alt=""></span>
+      <span class="pull" aria-hidden="true"></span>
+    </div>
+  </div>
+  <p class="knock" id="knock"><span>Sentuh untuk membuka</span></p>
 </div>
 
 <main>
@@ -763,7 +593,7 @@
         </svg>
 
         <div class="stack s2">
-          <img class="crest-mark" src="logo.png" alt="Monogram Ammar &amp; Atiqah">
+          <img class="crest-mark" src="../logo.png" alt="Monogram Ammar &amp; Atiqah">
           <p class="eyebrow" data-f="majlis">Majlis Pertunangan</p>
           <h1 class="names"><span data-f="nama1">Ammar</span><span class="amp">&amp;</span><span data-f="nama2">Atiqah</span></h1>
           <div class="rule" aria-hidden="true"><i></i></div>
@@ -786,14 +616,12 @@
 
     <div class="inner stack s3 reveal">
 
-      <!-- the invitation proper: salam, the parents, the invitation,
-           a rule, then the couple -->
       <div class="stack s2">
-        <p class="arabic salam">السلام عليكم ورحمة الله وبركاته</p>
-        <p class="parents"><span data-f="bapa">ABDUL RAHMAN BIN MOHAMAD</span><span class="amp-caps">&amp;</span><span data-f="ibu">KASMIAH BINTI KAMALUDIN</span></p>
-        <p class="invite" data-f="mukadimah">Dengan penuh syukur ke hadrat Ilahi, kami menjemput anda ke majlis pertunangan anakanda kami</p>
+        <p class="arabic salam">ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</p>
         <div class="rule" aria-hidden="true"><i></i></div>
-        <h2 class="couple"><span data-f="namaPerempuan">NUR ATIQAH SYAFIQAH BINTI ABDUL RAHMAN</span><span class="amp-caps">&amp;</span><span data-f="namaLelaki">MUHAMMAD AMMAR BIN PAUZAN</span></h2>
+        <p class="body" data-f="mukadimah">Dengan penuh rasa kesyukuran ke hadrat Allah SWT, kami menjemput Dato' / Datin / Tuan / Puan / Encik / Cik sekeluarga ke majlis pertunangan anakanda kami:</p>
+        <h2 class="names"><span data-f="nama1">Ammar</span><span class="amp">&amp;</span><span data-f="nama2">Atiqah</span></h2>
+        <p class="verse" data-f="tuanRumah">[ NAMA TUAN RUMAH ]</p>
       </div>
 
       <div class="rule" aria-hidden="true"><i></i></div>
@@ -806,8 +634,8 @@
         </div>
         <div class="stack s1">
           <p class="label">Bertempat di</p>
-          <h3 class="venue" data-f="tempat">Bella Homestay</h3>
-          <p class="verse" data-f="alamat">No 1, Jalan BLS 3, Taman Bukit Larang Sentosa, 75460 Telok Mas, Malacca</p>
+          <h3 class="venue" data-f="tempat">[ NAMA TEMPAT ]</h3>
+          <p class="verse" data-f="alamat">[ alamat penuh ]</p>
         </div>
         <div class="btns">
           <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener noreferrer">
@@ -870,7 +698,7 @@
         <ul class="folk" id="folk"></ul>
       </div>
 
-      <img class="crest-mark small" src="logo.png" alt="" aria-hidden="true">
+      <img class="crest-mark small" src="../logo.png" alt="" aria-hidden="true">
     </div>
   </section>
 
@@ -896,49 +724,42 @@
        Use <br> for a line break. */
     pantun:   'Dua hati satu ikatan,<br>moga berkekalan hingga ke syurga.',
 
-    /* ---- the jemputan, shown in this order ---- */
-
-    /* the parents (tuan rumah), shown in capitals */
-    bapa:     'ABDUL RAHMAN BIN MOHAMAD',
-    ibu:      'KASMIAH BINTI KAMALUDIN',
-
-    mukadimah: 'Dengan penuh syukur ke hadrat Ilahi, kami menjemput anda ke majlis ' +
-               'pertunangan anakanda kami',
-
-    /* ISI DI SINI — nama penuh pasangan jika mahu, cth 'Nur Atiqah binti …'.
-       Dipaparkan dalam huruf besar; pengantin perempuan dahulu. */
-    namaPerempuan: 'NUR ATIQAH SYAFIQAH BINTI ABDUL RAHMAN',
-    namaLelaki:    'MUHAMMAD AMMAR BIN PAUZAN',
-
+    /* ---- shown in the jemputan section ---- */
+    mukadimah: 'Dengan penuh rasa kesyukuran ke hadrat Allah SWT, kami menjemput ' +
+               'Dato’ / Datin / Tuan / Puan / Encik / Cik sekeluarga ke majlis ' +
+               'pertunangan anakanda kami:',
     tarikhPenuh: 'SABTU · 7 NOVEMBER 2026',
 
     /* ISI DI SINI — tambah masa tamat jika perlu, cth '2:00 – 5:00 PETANG' */
     masa:     '2:00 PETANG',
 
     /* ISI DI SINI — nama tempat, cth 'Kediaman Pihak Perempuan' atau nama dewan */
-    tempat:   'Bella Homestay',
+    tempat:   '[ NAMA TEMPAT ]',
 
     alamat:   'No. 1, Jalan BLS 3, Taman Bukit Larang Sentosa,<br>75460 Telok Mas, Melaka',
+
+    /* ISI DI SINI — baris tuan rumah, cth 'Tn. Hj. … & Pn. Hjh. …' */
+    tuanRumah:'[ NAMA TUAN RUMAH ]',
 
     /* the countdown runs to this moment, Malaysian time (+08:00) */
     masaMajlis: '2026-11-07T14:00:00+08:00',
 
     /* ISI DI SINI — tampal pautan kongsi dari aplikasi.
        Biarkan kosong ('') untuk menyembunyikan butang berkenaan. */
-    maps:     'https://maps.app.goo.gl/byXDszYV9Y69T79B7',
+    maps:     '#link_here',
     waze:     '',
 
     /* ISI DI SINI — nama, peranan dan nombor telefon.
        Nombor kosong = tiada butang panggil/WhatsApp.
        Senarai kosong [] = seksyen Hubungi hilang terus. */
     hubungi: [
-      {nama: 'KASMIAH', peranan: 'IBU', tel: '0136308182'},
-      {nama: 'AFIQAH', peranan: 'ADIK', tel: '01156930169'}
+      {nama: '[ NAMA ]', peranan: '[ Peranan ]', tel: ''},
+      {nama: '[ NAMA ]', peranan: '[ Peranan ]', tel: ''}
     ],
 
     /* ISI DI SINI — letak fail lagu di folder ini dan namakannya, cth 'songs.mp3'.
        Kosong = tiada muzik, dan butang senyap turut hilang. */
-    lagu: 'lagu.mp3'
+    lagu: '../lagu.mp3'
   };
   /* ============================ end ============================= */
 
@@ -953,12 +774,6 @@
     if(/<br>|<em>|<strong>/.test(v)) el.innerHTML = v; else el.textContent = v;
   });
   document.title = INVITE.nama1 + ' & ' + INVITE.nama2;
-
-  /* long full names get the smaller couple size */
-  var couple = $('.couple');
-  if(couple && Math.max((INVITE.namaPerempuan || '').length, (INVITE.namaLelaki || '').length) > 18){
-    couple.classList.add('long');
-  }
 
   /* ---------- botanical frames ---------- */
   /* Each frame is composed here rather than written out by hand: the symbols
@@ -1124,32 +939,23 @@
     revealables.forEach(function(el){ el.classList.add('in'); });
   }
 
-  /* ---------- the envelope ---------- */
-  /* One tap: the stamp cracks in two, the flap opens, the letter lifts,
-     and the envelope dissolves into the invitation. The song starts inside
-     that same tap, the gesture phones require before any audio may play.
-     Once gone, the overlay is hidden outright so it can never swallow taps. */
-  var gate = $('#gate');
-  var flapHold = $('#flapHold');
+  /* ---------- the doors ---------- */
+  /* Tapping opens them; once the swing has finished they are hidden outright
+     so they can never sit invisibly over the page and swallow taps. */
+  var doors = $('#doors');
   var opened = false;
-  function openEnvelope(){
+  function openDoors(){
     if(opened) return;
     opened = true;
-    gate.classList.add('broken');
-    gate.setAttribute('aria-hidden', 'true');
-    startSong();
-    setTimeout(function(){ gate.classList.add('opening'); }, reduced ? 100 : 620);
-    setTimeout(function(){ flapHold.classList.add('flap-behind'); }, reduced ? 100 : 1100);
-    setTimeout(function(){ gate.classList.add('lifted'); }, reduced ? 250 : 1450);
-    setTimeout(function(){
-      gate.classList.add('away');
-      document.body.classList.remove('sealed');
-    }, reduced ? 1000 : 3200);
-    setTimeout(function(){ gate.classList.add('gone'); }, reduced ? 2000 : 4300);
+    doors.classList.add('open');
+    startSong();                        /* inside the tap, so phones allow it */
+    doors.setAttribute('aria-hidden', 'true');
+    setTimeout(function(){ document.body.classList.remove('sealed'); }, reduced ? 300 : 1100);
+    setTimeout(function(){ doors.classList.add('gone'); }, reduced ? 1100 : 2200);
   }
-  gate.addEventListener('click', openEnvelope);
-  gate.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openEnvelope(); }
+  doors.addEventListener('click', openDoors);
+  doors.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openDoors(); }
   });
 
   /* ---------- scroll cue ---------- */
@@ -1274,7 +1080,7 @@
     song.loop = true;
     song.preload = 'auto';
     document.body.appendChild(song);
-    /* not started here: the music begins as the envelope opens (see openEnvelope),
+    /* not started here: the music begins as the doors open (see openDoors),
        and that tap is the very gesture phones require before audio can play */
   }else{
     sound.parentNode.removeChild(sound);
@@ -1313,5 +1119,6 @@
   }
 })();
 </script>
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:99;padding:6px 10px;font:11px/1.4 system-ui,sans-serif;text-align:center;background:rgba(94,58,71,.88);color:#fff">Design snapshot · Double doors, split monogram · <a href="../docs/" style="color:#fff">docs</a></div>
 </body>
 </html>

@@ -15,19 +15,19 @@
      --------------------------------------------------------------- */
   @font-face{
     font-family:'Pinyon Script'; font-style:normal; font-weight:400; font-display:swap;
-    src:url('fonts/pinyon.woff2') format('woff2');
+    src:url('../fonts/pinyon.woff2') format('woff2');
   }
   @font-face{
     font-family:'Cormorant Garamond'; font-style:normal; font-weight:400; font-display:swap;
-    src:url('fonts/cormorant400.woff2') format('woff2');
+    src:url('../fonts/cormorant400.woff2') format('woff2');
   }
   @font-face{
     font-family:'Cormorant Garamond'; font-style:normal; font-weight:500; font-display:swap;
-    src:url('fonts/cormorant500.woff2') format('woff2');
+    src:url('../fonts/cormorant500.woff2') format('woff2');
   }
   @font-face{
     font-family:'Amiri'; font-style:normal; font-weight:400; font-display:swap;
-    src:url('fonts/amiri.woff2') format('woff2');
+    src:url('../fonts/amiri.woff2') format('woff2');
   }
 
   :root{
@@ -222,46 +222,101 @@
   .cartouche svg{position:absolute; inset:0; width:100%; height:100%; z-index:0;}
   .cartouche .stack{position:relative; z-index:1;}
 
-
   /* ---------------------------------------------------------------
-     The jemputan's wording: parents and couple in spaced capitals,
-     the invitation line between them
+     The arch
+     A mosque-arch frame in two paper layers. Each layer is a cap (an
+     svg that scales uniformly, so the curve never distorts) over a
+     straight shaft that grows with the content. The content sits over
+     both, so text can rise into the dome.
      --------------------------------------------------------------- */
+  #jemputan{
+    /* a faint eight-point-star lattice behind the arch */
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23b8a29b' stroke-opacity='.12' stroke-width='1'%3E%3Crect x='21' y='21' width='22' height='22'/%3E%3Crect x='21' y='21' width='22' height='22' transform='rotate(45 32 32)'/%3E%3Cpath d='M0 32h9M55 32h9M32 0v9M32 55v9'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .arch{
+    --aw:min(86vw, 360px);
+    --arch-fill:#FFFEFC;
+    --arch-back:#F3EBE8;
+    --arch-line:rgba(194,160,99,.55);
+    --plum:#5E3446;
+    position:relative;
+    width:var(--aw);
+    margin:0 auto;
+  }
+  .arch-frame{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column;
+    pointer-events:none;
+  }
+  .arch-frame.back{
+    inset:calc(var(--aw) * -.045);
+    filter:drop-shadow(0 16px 28px rgba(107,90,82,.12));
+  }
+  .arch-frame.front{filter:drop-shadow(0 8px 16px rgba(107,90,82,.15));}
+  .arch-cap{display:block; width:100%; height:auto; flex:none; overflow:visible;}
+  .back .cap-fill{fill:var(--arch-back);}
+  .front .cap-fill{fill:var(--arch-fill);}
+  .cap-line{fill:none; stroke:var(--arch-line); stroke-width:1; vector-effect:non-scaling-stroke;}
+  .arch-shaft{flex:1 1 auto; margin-top:-1px; position:relative;}
+  .back .arch-shaft{background:var(--arch-back);}
+  .front .arch-shaft{background:var(--arch-fill);}
+  /* the inner hairline carries on down the shaft, inset by the same
+     fraction of the width the cap uses (10 of 300 units) */
+  .front .arch-shaft::before{
+    content:""; position:absolute; top:0;
+    left:calc(var(--aw) / 30 - .5px); right:calc(var(--aw) / 30 - .5px);
+    bottom:calc(var(--aw) / 30);
+    border:1px solid var(--arch-line); border-top:0;
+  }
+
+  .arch-content{
+    position:relative; z-index:3;
+    display:flex; flex-direction:column; align-items:center; gap:1.05em;
+    padding:calc(var(--aw) * .2) calc(var(--aw) * .13) calc(var(--aw) * .46);
+  }
+  .arch-content .salam{margin:0; font-size:clamp(30px, 10vw, 46px); line-height:1.5; color:var(--plum);}
   .parents{
     margin:0;
     display:flex; flex-direction:column; align-items:center;
     font-family:var(--serif); font-weight:500;
-    font-size:clamp(14px, 4.2vw, 18px);
-    letter-spacing:.12em; text-indent:.12em; text-transform:uppercase;
+    font-size:clamp(13px, 4vw, 17px);
+    letter-spacing:.1em; text-indent:.1em; text-transform:uppercase;
     line-height:1.55;
     color:var(--ink);
   }
   .invite{
     margin:0;
-    max-width:18em;
-    font-size:clamp(14px, 4vw, 16.5px);
-    line-height:1.85; letter-spacing:.03em;
-    color:var(--ink);
+    max-width:17em;
+    font-size:clamp(13px, 3.8vw, 15.5px);
+    line-height:1.75; letter-spacing:.04em;
+    color:var(--plum);
     text-wrap:balance;
   }
   .couple{
     margin:0;
     display:flex; flex-direction:column; align-items:center; gap:.12em;
     font-family:var(--serif); font-weight:500;
-    font-size:clamp(22px, 7vw, 32px);
-    letter-spacing:.16em; text-indent:.16em; text-transform:uppercase;
+    font-size:clamp(20px, 6.4vw, 29px);
+    letter-spacing:.14em; text-indent:.14em; text-transform:uppercase;
     line-height:1.3;
-    color:var(--ink);
+    color:var(--plum);
     text-wrap:balance;
   }
-  /* full names ("… BINTI …") would take three lines each at the size above;
-     set smaller and tighter they wrap to two balanced lines */
-  .couple.long{
-    font-size:clamp(17px, 5vw, 24px);
-    letter-spacing:.1em; text-indent:.1em;
-    line-height:1.4; gap:.3em;
+  .amp-caps{font-size:.8em; line-height:1.4;}
+
+  /* a solid rule broken by a four-point star */
+  .rule.star{width:min(200px, 60%);}
+  .rule.star::before, .rule.star::after{background:rgba(94,52,70,.55);}
+  .rule.star svg{width:11px; height:11px; flex:none; fill:var(--plum);}
+
+  /* flowering branches rising from the arch's lower corners, spilling past
+     its sides; above the paper, below the words */
+  .branches{
+    position:absolute; z-index:2;
+    left:-13%; width:126%; bottom:-3%; height:auto;
+    pointer-events:none;
   }
-  .amp-caps{font-size:.78em; line-height:1.4; color:var(--ink-soft);}
 
   /* the oval narrows toward its foot, so verse there must wrap early */
   .cartouche .verse{max-width:17em; margin-left:auto; margin-right:auto; text-wrap:balance;}
@@ -731,9 +786,9 @@
     <!-- the stamp: one whole face while sealed; two halves for the crack -->
     <span class="seal" aria-hidden="true">
       <span class="seal-rim"></span>
-      <span class="seal-face"><img src="logo.png" alt=""></span>
-      <span class="seal-half l"><img src="logo.png" alt=""></span>
-      <span class="seal-half r"><img src="logo.png" alt=""></span>
+      <span class="seal-face"><img src="../logo.png" alt=""></span>
+      <span class="seal-half l"><img src="../logo.png" alt=""></span>
+      <span class="seal-half r"><img src="../logo.png" alt=""></span>
     </span>
   </div>
 
@@ -763,7 +818,7 @@
         </svg>
 
         <div class="stack s2">
-          <img class="crest-mark" src="logo.png" alt="Monogram Ammar &amp; Atiqah">
+          <img class="crest-mark" src="../logo.png" alt="Monogram Ammar &amp; Atiqah">
           <p class="eyebrow" data-f="majlis">Majlis Pertunangan</p>
           <h1 class="names"><span data-f="nama1">Ammar</span><span class="amp">&amp;</span><span data-f="nama2">Atiqah</span></h1>
           <div class="rule" aria-hidden="true"><i></i></div>
@@ -786,15 +841,33 @@
 
     <div class="inner stack s3 reveal">
 
-      <!-- the invitation proper: salam, the parents, the invitation,
-           a rule, then the couple -->
-      <div class="stack s2">
-        <p class="arabic salam">السلام عليكم ورحمة الله وبركاته</p>
-        <p class="parents"><span data-f="bapa">ABDUL RAHMAN BIN MOHAMAD</span><span class="amp-caps">&amp;</span><span data-f="ibu">KASMIAH BINTI KAMALUDIN</span></p>
-        <p class="invite" data-f="mukadimah">Dengan penuh syukur ke hadrat Ilahi, kami menjemput anda ke majlis pertunangan anakanda kami</p>
-        <div class="rule" aria-hidden="true"><i></i></div>
-        <h2 class="couple"><span data-f="namaPerempuan">NUR ATIQAH SYAFIQAH BINTI ABDUL RAHMAN</span><span class="amp-caps">&amp;</span><span data-f="namaLelaki">MUHAMMAD AMMAR BIN PAUZAN</span></h2>
+      <!-- the invitation proper, in a mosque-arch frame: salam at the crown,
+           the parents, the invitation, a star rule, then the couple -->
+      <div class="arch">
+        <div class="arch-frame back" aria-hidden="true">
+          <svg class="arch-cap" viewBox="0 0 300 150"><path class="cap-fill" d="M0 150 L0 104 Q0 56 72 38 Q134 24 150 0 Q166 24 228 38 Q300 56 300 104 L300 150 Z"/></svg>
+          <div class="arch-shaft"></div>
+        </div>
+        <div class="arch-frame front" aria-hidden="true">
+          <svg class="arch-cap" viewBox="0 0 300 150">
+            <path class="cap-fill" d="M0 150 L0 104 Q0 56 72 38 Q134 24 150 0 Q166 24 228 38 Q300 56 300 104 L300 150 Z"/>
+            <path class="cap-line" d="M10 151 L10 106 Q10 64 76 48 Q136 34 150 15 Q164 34 224 48 Q290 64 290 106 L290 151"/>
+          </svg>
+          <div class="arch-shaft"></div>
+        </div>
+        <svg class="branches" viewBox="0 0 400 300" aria-hidden="true"></svg>
+
+        <div class="arch-content">
+          <p class="arabic salam">ٱلسَّلَامُ عَلَيْكُمْ</p>
+          <p class="parents"><span data-f="bapa">ABDUL RAHMAN</span><span class="amp-caps">&amp;</span><span data-f="ibu">KASMIAH</span></p>
+          <p class="invite" data-f="mukadimah">Dengan penuh syukur ke hadrat Ilahi, kami menjemput anda ke majlis pertunangan anakanda kami</p>
+          <div class="rule star" aria-hidden="true">
+            <svg viewBox="0 0 12 12"><path d="M6 0 L7.3 4.7 L12 6 L7.3 7.3 L6 12 L4.7 7.3 L0 6 L4.7 4.7 Z"/></svg>
+          </div>
+          <h2 class="couple"><span data-f="namaPerempuan">Atiqah</span><span class="amp-caps">&amp;</span><span data-f="namaLelaki">Ammar</span></h2>
+        </div>
       </div>
+
 
       <div class="rule" aria-hidden="true"><i></i></div>
 
@@ -806,7 +879,7 @@
         </div>
         <div class="stack s1">
           <p class="label">Bertempat di</p>
-          <h3 class="venue" data-f="tempat">Bella Homestay</h3>
+          <h3 class="venue" data-f="tempat">Rumah</h3>
           <p class="verse" data-f="alamat">No 1, Jalan BLS 3, Taman Bukit Larang Sentosa, 75460 Telok Mas, Malacca</p>
         </div>
         <div class="btns">
@@ -870,7 +943,7 @@
         <ul class="folk" id="folk"></ul>
       </div>
 
-      <img class="crest-mark small" src="logo.png" alt="" aria-hidden="true">
+      <img class="crest-mark small" src="../logo.png" alt="" aria-hidden="true">
     </div>
   </section>
 
@@ -896,19 +969,19 @@
        Use <br> for a line break. */
     pantun:   'Dua hati satu ikatan,<br>moga berkekalan hingga ke syurga.',
 
-    /* ---- the jemputan, shown in this order ---- */
+    /* ---- the jemputan, in the arch — in this order ---- */
 
     /* the parents (tuan rumah), shown in capitals */
-    bapa:     'ABDUL RAHMAN BIN MOHAMAD',
-    ibu:      'KASMIAH BINTI KAMALUDIN',
+    bapa:     'ABDUL RAHMAN',
+    ibu:      'KASMIAH',
 
     mukadimah: 'Dengan penuh syukur ke hadrat Ilahi, kami menjemput anda ke majlis ' +
                'pertunangan anakanda kami',
 
     /* ISI DI SINI — nama penuh pasangan jika mahu, cth 'Nur Atiqah binti …'.
        Dipaparkan dalam huruf besar; pengantin perempuan dahulu. */
-    namaPerempuan: 'NUR ATIQAH SYAFIQAH BINTI ABDUL RAHMAN',
-    namaLelaki:    'MUHAMMAD AMMAR BIN PAUZAN',
+    namaPerempuan: 'Atiqah',
+    namaLelaki:    'Ammar',
 
     tarikhPenuh: 'SABTU · 7 NOVEMBER 2026',
 
@@ -916,7 +989,7 @@
     masa:     '2:00 PETANG',
 
     /* ISI DI SINI — nama tempat, cth 'Kediaman Pihak Perempuan' atau nama dewan */
-    tempat:   'Bella Homestay',
+    tempat:   'Rumah',
 
     alamat:   'No. 1, Jalan BLS 3, Taman Bukit Larang Sentosa,<br>75460 Telok Mas, Melaka',
 
@@ -932,13 +1005,13 @@
        Nombor kosong = tiada butang panggil/WhatsApp.
        Senarai kosong [] = seksyen Hubungi hilang terus. */
     hubungi: [
-      {nama: 'KASMIAH', peranan: 'IBU', tel: '0136308182'},
-      {nama: 'AFIQAH', peranan: 'ADIK', tel: '01156930169'}
+      {nama: '[ NAMA ]', peranan: '[ Peranan ]', tel: ''},
+      {nama: '[ NAMA ]', peranan: '[ Peranan ]', tel: ''}
     ],
 
     /* ISI DI SINI — letak fail lagu di folder ini dan namakannya, cth 'songs.mp3'.
        Kosong = tiada muzik, dan butang senyap turut hilang. */
-    lagu: 'lagu.mp3'
+    lagu: '../lagu.mp3'
   };
   /* ============================ end ============================= */
 
@@ -953,12 +1026,6 @@
     if(/<br>|<em>|<strong>/.test(v)) el.innerHTML = v; else el.textContent = v;
   });
   document.title = INVITE.nama1 + ' & ' + INVITE.nama2;
-
-  /* long full names get the smaller couple size */
-  var couple = $('.couple');
-  if(couple && Math.max((INVITE.namaPerempuan || '').length, (INVITE.namaLelaki || '').length) > 18){
-    couple.classList.add('long');
-  }
 
   /* ---------- botanical frames ---------- */
   /* Each frame is composed here rather than written out by hand: the symbols
@@ -1039,6 +1106,61 @@
   }
 
   $$('.flora').forEach(function(svg, i){ bouquet(svg, 7 + i * 13); });
+
+  /* ---------- flowering branches at the arch's foot ---------- */
+  /* Twig stems rise from each lower corner along a gentle S-curve, with
+     blossoms and buds strung along their upper reaches in deep plum. One
+     side is drawn, the other mirrors it with its own random draws. */
+  function bezier(p0, p1, p2, p3, t){
+    var u = 1 - t;
+    return [
+      u*u*u*p0[0] + 3*u*u*t*p1[0] + 3*u*t*t*p2[0] + t*t*t*p3[0],
+      u*u*u*p0[1] + 3*u*u*t*p1[1] + 3*u*t*t*p2[1] + t*t*t*p3[1]
+    ];
+  }
+  var PLUM = ['#7C2C4C', '#9A3A61', '#B4527D', '#86425F', '#C06F91'];
+  var TWIG = '#7B5E54';
+
+  function branches(svg, seed){
+    var rnd = seeded(seed);
+    var W = 400, H = 300, parts = [];
+
+    function grow(side){                       /* 1 = left corner, -1 = right */
+      var mx = function(x){ return side > 0 ? x : W - x; };
+      var f = function(n){ return n.toFixed(1); };
+      for(var s = 0; s < 8; s++){
+        var x0 = 30 + rnd() * 46, y0 = H + 4;
+        var h  = 70 + rnd() * 150;             /* shorter: clusters, not stalks */
+        var x3 = x0 - 20 + rnd() * 80, y3 = H - h;
+        var p0 = [x0, y0],
+            p1 = [x0 + (rnd() - .5) * 40, y0 - h * .35],
+            p2 = [x3 + (rnd() - .5) * 50, y3 + h * .3],
+            p3 = [x3, y3];
+        parts.push('<path d="M' + f(mx(p0[0])) + ' ' + f(p0[1]) +
+                   ' C' + f(mx(p1[0])) + ' ' + f(p1[1]) + ' ' + f(mx(p2[0])) + ' ' + f(p2[1]) +
+                   ' ' + f(mx(p3[0])) + ' ' + f(p3[1]) + '" fill="none" stroke="' + TWIG +
+                   '" stroke-width="' + (0.8 + rnd() * .7).toFixed(2) + '" stroke-linecap="round" opacity=".85"/>');
+
+        var stops = [.3, .4, .5, .6, .68, .76, .84, .92, 1];
+        for(var k = 0; k < stops.length; k++){
+          if(stops[k] < 1 && rnd() < .24) continue;
+          var pt = bezier(p0, p1, p2, p3, stops[k] + (rnd() - .5) * .04);
+          var bloom = rnd() > .38;
+          parts.push(place(
+            bloom ? 'cosmos' : 'bud',
+            mx(pt[0] + (rnd() - .5) * 10), pt[1],
+            rnd() * 360,
+            bloom ? .6 + rnd() * .75 : .6 + rnd() * .5,
+            PLUM[(s + k) % PLUM.length],
+            .82 + rnd() * .16
+          ));
+        }
+      }
+    }
+    grow(1); grow(-1);
+    svg.innerHTML = parts.join('');
+  }
+  $$('.branches').forEach(function(svg, i){ branches(svg, 31 + i * 17); });
 
   /* ---------- links ---------- */
   function wire(btn, url){
@@ -1313,5 +1435,6 @@
   }
 })();
 </script>
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:99;padding:6px 10px;font:11px/1.4 system-ui,sans-serif;text-align:center;background:rgba(94,58,71,.88);color:#fff">Design snapshot · Mosque-arch jemputan · <a href="../docs/" style="color:#fff">docs</a></div>
 </body>
 </html>
