@@ -24,11 +24,11 @@ var INVITE = {
 | `nama1`, `nama2` | The couple, used on the cover and in the jemputan |
 | `coverTarikh` | Date as shown on the cover |
 | `pantun` | The couplet under the cover date (`<br>` for a line break) |
-| `mukadimah` | The invitation line in the arch |
+| `mukadimah` | The invitation line between the parents and the couple |
 | `tarikhPenuh`, `masa` | Date and time in the details section |
 | `tempat`, `alamat` | Venue name and address |
-| `bapa`, `ibu` | The parents (hosts), at the top of the arch, in capitals |
-| `namaPerempuan`, `namaLelaki` | The couple in the arch, bride first, in capitals — full names if you like |
+| `bapa`, `ibu` | The parents (hosts), under the salam, in capitals |
+| `namaPerempuan`, `namaLelaki` | The couple, bride first, in capitals — full names if you like |
 | `masaMajlis` | What the countdown runs to — ISO format, `+08:00` for Malaysian time |
 | `maps`, `waze` | Paste the share links. **An empty string hides that button.** |
 | `hubungi` | Contacts. **An empty list removes the whole section.** |
@@ -80,7 +80,7 @@ placeholder:
 - [ ] `waze` — empty, so that button is hidden; fill it in to show it
 - [ ] `masa` — currently `2:00 PETANG`; add an end time if the majlis has one
 - [ ] `pantun` — swap in your own couplet if you'd rather
-- [x] `lagu` — set to `lagu.m4a`; starts as the envelope opens
+- [x] `lagu` — set to `lagu.mp3`; starts as the envelope opens
 
 ## The monogram
 
@@ -92,12 +92,16 @@ the file to change it everywhere.
 
 ## The music
 
-`lagu.m4a` starts as the envelope opens — deliberately not on page load. Phones
+`lagu.mp3` starts as the envelope opens — deliberately not on page load. Phones
 block audio until the visitor taps something, and the tap that opens the
 envelope is exactly that gesture, so it plays reliably on iPhones as well.
 
-It is an `.m4a`, not an `.mp3`: the downloaded file was AAC audio in an MP4
-container carrying a misleading `.mp3` name. Under that name GitHub Pages
-would serve it as `audio/mpeg`, and Safari can refuse audio whose declared
-type doesn't match its contents. If you swap the song, keep the extension
-true to the file.
+**Keep the file's extension true to what's inside it.** GitHub Pages picks the
+audio type from the extension — `.mp3` is served as `audio/mpeg`, `.m4a` as
+`audio/mp4` — and Safari can refuse to play audio whose declared type doesn't
+match its contents. Downloaders often get this wrong: the first song was AAC
+labelled `.mp3`, and the replacement was an MP3 labelled `.m4a`. The current
+file is a genuine MP3, so it's `lagu.mp3`.
+
+To check a file: open it in a hex viewer or run `file` on it. `ID3` at the
+start means MP3; `ftyp` in bytes 4–7 means M4A/MP4.
