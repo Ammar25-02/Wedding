@@ -15,7 +15,7 @@ Open paper, taupe ink, gold diamond rules — matching the rest of the site.
 
 | Line | Field in `INVITE` | Styled as |
 |---|---|---|
-| السلام عليكم | *(in the markup)* | Amiri, large |
+| السلام عليكم ورحمة الله وبركاته | *(in the markup — edit it there)* | Amiri, large; wraps to two lines on small phones |
 | Father's name | `bapa` | spaced capitals |
 | & | | small, soft |
 | Mother's name | `ibu` | spaced capitals |
