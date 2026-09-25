@@ -573,24 +573,10 @@
   .seal-half{opacity:0;}
   .seal-half.l{clip-path:polygon(0 0, 50% 0, 50% 100%, 0 100%);}
   .seal-half.r{clip-path:polygon(50% 0, 100% 0, 100% 100%, 50% 100%);}
+  /* the tap simply fades the seal away */
+  .seal-face{transition:opacity .6s ease;}
   .broken .seal-face{opacity:0;}
   .broken .seal-rim{opacity:0;}
-  /* the seal first cracks open a little, holds, then the halves fall away —
-     opacity only goes at the very end, so the split itself is seen */
-  .broken .seal-half.l{animation:crackL 1.1s linear forwards;}
-  .broken .seal-half.r{animation:crackR 1.1s linear forwards;}
-  @keyframes crackL{
-    0%  {opacity:1; transform:none; animation-timing-function:cubic-bezier(.2,.8,.3,1);}
-    22% {opacity:1; transform:translate(-7%, 1%) rotate(-5deg); animation-timing-function:cubic-bezier(.5,0,.8,.4);}
-    78% {opacity:1;}
-    100%{opacity:0; transform:translate(-48%, 70%) rotate(-34deg);}
-  }
-  @keyframes crackR{
-    0%  {opacity:1; transform:none; animation-timing-function:cubic-bezier(.2,.8,.3,1);}
-    22% {opacity:1; transform:translate(7%, 1%) rotate(5deg); animation-timing-function:cubic-bezier(.5,0,.8,.4);}
-    78% {opacity:1;}
-    100%{opacity:0; transform:translate(48%, 76%) rotate(30deg);}
-  }
 
   .lifted .letter{transform:translateY(-52%);}
 
@@ -615,7 +601,6 @@
   /* reduced motion: the seal, flap and letter fade rather than move */
   @media (prefers-reduced-motion:reduce){
     .seal-face{transition:opacity .5s ease;}
-    .broken .seal-half.l, .broken .seal-half.r{animation:none;}
     .flap{transition:opacity .6s ease;}
     .opening .flap{transform:none; opacity:0;}
     .lifted .letter{transform:none;}

@@ -1,7 +1,7 @@
 # Jemputan Pertunangan — Ammar & Atiqah
 
 A single-page Malay engagement invitation (majlis pertunangan). It opens on a portrait
-envelope sealed with a wax stamp pressed with the couple's monogram; a tap cracks
+envelope sealed with a wax stamp pressed with the couple's monogram; a tap fades
 the seal, opens the flap, lifts the
 letter out, and dissolves into three pages: the cover, the jemputan (details, map and countdown), and the doa
 with contacts. Watercolour botanical frames, drifting butterflies, and a

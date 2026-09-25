@@ -17,7 +17,7 @@ also starts the music (phones only allow sound after a tap).
 
 | | Design | Demo | Guide |
 |---|---|---|---|
-| <img src="img/stamp-sealed.jpg" width="120"> | **Portrait envelope, wax stamp** — monogram pressed into a wax seal at the centre; the seal cracks in two, the flap opens, a letter rises. *Current.* | [live](https://ammar25-02.github.io/Wedding/) | [01](01-envelope-stamp.md) |
+| <img src="img/stamp-sealed.jpg" width="120"> | **Portrait envelope, wax stamp** — monogram pressed into a wax seal at the centre; the seal fades, the flap opens, a letter rises. *Current.* | [live](https://ammar25-02.github.io/Wedding/) | [01](01-envelope-stamp.md) |
 | <img src="img/landscape-sealed.jpg" width="120"> | **Landscape envelope** — monogram printed on the envelope's face; flap opens and a letter rises. | [demo](https://ammar25-02.github.io/Wedding/designs/envelope-landscape.html) | [02](02-envelope-landscape.md) |
 | <img src="img/doors-closed.jpg" width="120"> | **Double doors** — two doors each carrying half the monogram; they swing open in 3D and the initials part. | [demo](https://ammar25-02.github.io/Wedding/designs/doors.html) | [03](03-doors.md) |
 | <img src="img/engagement-sealed.jpg" width="120"> | **Envelope with a printed card** — uses a finished card *image*: the card rises out and grows to fill the screen. | [live](https://ammar25-02.github.io/wedding-Invite/) | [04](04-card-envelope.md) |

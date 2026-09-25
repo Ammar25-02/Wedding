@@ -1,10 +1,9 @@
 # 01 · Portrait envelope with a wax stamp
 
-<img src="img/stamp-sealed.jpg" width="200"> <img src="img/stamp-crack.jpg" width="200"> <img src="img/stamp-letter.jpg" width="200">
+<img src="img/stamp-sealed.jpg" width="200"> <img src="img/stamp-fade.jpg" width="200"> <img src="img/stamp-letter.jpg" width="200">
 
 A portrait envelope sealed at its centre with a wax stamp pressed with the
-couple's monogram. One tap: the seal cracks down the middle — one initial on
-each half — the halves fall away, the flap opens, a letter bearing the names
+couple's monogram. One tap: the seal fades away, the flap opens, a letter bearing the names
 rises out, and the envelope dissolves into the invitation.
 
 **Live:** https://ammar25-02.github.io/Wedding/ · **Source:** `index.html`
@@ -13,7 +12,7 @@ rises out, and the envelope dissolves into the invitation.
 
 | Time | What happens | Class added |
 |---|---|---|
-| 0 ms | Seal cracks; hint fades; **music starts** | `.broken` on `#gate` |
+| 0 ms | Seal fades out (0.6 s); hint fades; **music starts** | `.broken` on `#gate` |
 | 620 ms | Flap swings up and back | `.opening` |
 | 1100 ms | Flap drops behind the letter | `.flap-behind` on `#flapHold` |
 | 1450 ms | Letter rises out of the pocket | `.lifted` |
@@ -73,10 +72,14 @@ For a classic red wax: shine `rgba(214,120,138,.85)`, body `#792336` → `#9E334
 - **The monogram on the wax** is the same `logo.png`, turned pale with
   `filter: brightness(0) invert(1) sepia(.18)` and given a dark edge above and a
   light edge below with two `drop-shadow`s. That's what makes it look pressed in.
-- **The crack.** While sealed, one whole seal face is shown — no seam. On the
-  tap it hides and two identical halves, clipped left and right, take over.
-  Each half cracks open a little, pauses so the split is actually seen, then
-  falls, fading only at the very end.
+- **The seal fades.** On the tap `.broken` is added and the seal face's
+  opacity transitions to 0 over 0.6 s (`.seal-face{transition:opacity .6s ease}`).
+  Change `.6s` to make it quicker or slower. The flap starts opening at 620 ms,
+  just as the seal finishes.
+- **Want the crack back?** The earlier animation — the seal splitting in two,
+  one initial on each half — is in git history at commit `ba2211c`. Copy the
+  `@keyframes crackL` / `crackR` block and the two `.broken .seal-half`
+  lines from there, and remove the `.seal-face` transition so it hides at once.
 - **The flap** is a clipped triangle rotated `rotateX(-172deg)` inside a
   parent with `perspective`. The parent — not `preserve-3d` — carries the 3D, so
   ordinary `z-index` still decides what's in front. Halfway through the swing
