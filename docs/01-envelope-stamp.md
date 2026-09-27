@@ -49,29 +49,42 @@ The letter fills itself from the `INVITE` block (`majlis`, `nama1`, `nama2`,
 |---|---|---|
 | Envelope width | `--ew` on `.gate` | `min(72vw, 296px, 40svh)` |
 | Envelope proportion | `--eh` on `.gate` | `--ew × 1.34` (portrait) |
-| Seal size | `--seal` on `.gate` | `clamp(78px, --ew × .32, 104px)` |
-| Wax colour | `.seal-face, .seal-half` background | `#624550` → `#876570`, mauve |
-| Monogram on the wax | `.seal img` — `width`, `filter`, `opacity` | 68 % wide, pale cream, embossed |
+| Seal size | `--seal` on `.gate` | `clamp(86px, --ew × .36, 112px)` |
+| Wax colour | the `waxBody` and `waxPress` gradients in the seal's `<svg>` | cream, `#FCF8EF` → `#D8C6A8` |
+| Embossed monogram | `.seal-mark` — `width`, `filter` | 50 % wide, wax-coloured, in relief |
 | How far the letter rises | `.lifted .letter` | `translateY(-52%)` |
 | Date on the envelope | `.env-date` text in the markup | `07 · 11 · 2026` |
 | Timing | the `setTimeout` delays in `openEnvelope()` | see table above |
 
 ### Changing the wax colour
 
-The seal has three shades. Keep them in the same family, darkest last:
+The seal is an `<svg>` in the markup (search `class="seal-wax"`). Its colour
+comes from two gradients — the wax body and the pressed disc — plus the
+monogram's filter. Keep all three in one family:
 
-```css
-radial-gradient(40% 34% at 33% 27%, rgba(201,165,175,.85) 0%, rgba(201,165,175,0) 62%),  /* shine */
-radial-gradient(118% 118% at 64% 80%, #624550 0%, #876570 60%);                          /* body  */
-```
+| Wax | `waxBody` stops | `waxPress` stops | `.seal-mark` filter start |
+|---|---|---|---|
+| Cream *(current)* | `#FCF8EF` · `#EFE5D2` · `#D8C6A8` | `#F6EFE2` · `#E6D9C2` | `invert(.9) sepia(.32)` |
+| Burgundy | `#B4454F` · `#8E2733` · `#5E1620` | `#9C3440` · `#7A1F2A` | `invert(.55) sepia(.4) hue-rotate(-20deg) saturate(2)` |
+| Gold | `#F3DE9E` · `#D8B560` · `#A8843A` | `#E4C77C` · `#C9A450` | `invert(.8) sepia(.7) saturate(1.6)` |
 
-For a classic red wax: shine `rgba(214,120,138,.85)`, body `#792336` → `#9E3348`.
+The two small circles just before the pressed disc are its shadow (upper
+left) and highlight (lower right). On a dark wax, tone the highlight down —
+for burgundy set it to `fill="#E8A0A8" opacity=".5"` — or it shows as a bright
+ring. On burgundy the monogram reads as a pale rose-gold relief rather than
+wax-coloured; that is the effect of the filter above, and it looks intended.
 
 ## How it works
 
-- **The monogram on the wax** is the same `logo.png`, turned pale with
-  `filter: brightness(0) invert(1) sepia(.18)` and given a dark edge above and a
-  light edge below with two `drop-shadow`s. That's what makes it look pressed in.
+- **The seal is drawn, not a photo.** The wavy outline is an SVG path
+  generated once — ten soft lobes whose depth varies round the edge, plus a
+  slower wobble — so it looks like melted wax rather than a stamped badge. A
+  recessed disc sits in the middle, with a shadow on its upper-left wall and
+  light on its lower-right.
+- **The embossed monogram** is the same `logo.png`, turned wax-coloured with
+  `brightness(0) invert(.9) sepia(.32)`, then given a light edge above-left and
+  a shadow below-right with two `drop-shadow`s. Nothing but that light and
+  shadow makes it visible — exactly how a real seal's relief reads.
 - **The seal fades.** On the tap `.broken` is added and the seal face's
   opacity transitions to 0 over 0.6 s (`.seal-face{transition:opacity .6s ease}`).
   Change `.6s` to make it quicker or slower. The flap starts opening at 620 ms,

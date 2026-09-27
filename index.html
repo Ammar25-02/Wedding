@@ -432,7 +432,7 @@
   .gate{
     --ew:min(72vw, 296px, calc(40 * var(--vh)));
     --eh:calc(var(--ew) * 1.34);
-    --seal:clamp(78px, calc(var(--ew) * .32), 104px);
+    --seal:clamp(86px, calc(var(--ew) * .36), 112px);
     position:fixed; inset:0; z-index:50;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     padding-top:calc(18 * var(--vh));        /* sit low: flap and letter rise above */
@@ -549,50 +549,30 @@
   .opening .flap{transform:rotateX(-172deg); filter:none;}
   .flap-behind{z-index:0 !important;}
 
-  /* ---- the wax stamp, pressed with the monogram ---- */
+  /* ---- the wax stamp: cream wax, the monogram embossed in relief ---- */
   .seal{
     position:absolute; z-index:6;
     left:50%; top:50%;
-    width:var(--seal); height:var(--seal);
+    width:var(--seal); height:var(--seal);   /* both axes: no aspect-ratio (Safari 14) */
     margin:calc(var(--seal) / -2) 0 0 calc(var(--seal) / -2);
     display:block;
+    transition:opacity .6s ease;             /* the tap simply fades the seal away */
   }
-  .seal > span{position:absolute; display:block; border-radius:50%;}
-  .seal-rim{              /* the wax that spread past the stamp */
-    inset:-9%;
-    border-radius:48% 52% 51% 49% / 50% 47% 53% 50% !important;
-    background:radial-gradient(closest-side, rgba(128,94,104,.5), rgba(128,94,104,0) 76%);
-    transition:opacity .45s ease;
+  .seal-wax{
+    position:absolute; inset:0; width:100%; height:100%; overflow:visible;
+    filter:drop-shadow(0 3px 4px rgba(90,62,40,.28)) drop-shadow(0 1px 1px rgba(90,62,40,.25));
   }
-  .seal-face, .seal-half{
-    inset:0;
-    background:
-      radial-gradient(40% 34% at 33% 27%, rgba(201,165,175,.85) 0%, rgba(201,165,175,0) 62%),
-      radial-gradient(118% 118% at 64% 80%, #624550 0%, #876570 60%);
-    box-shadow:
-      0 6px 12px -3px rgba(80,50,60,.5),
-      inset 0 0 0 4px rgba(255,255,255,.07),
-      inset 0 0 0 5px rgba(60,35,45,.28),
-      inset 0 -3px 6px rgba(40,20,28,.35);
+  /* the monogram in the wax's own colour, raised: a light edge above-left and
+     a shadow below-right are all that make it visible, as on a real seal */
+  .seal-mark{
+    position:absolute; left:50%; top:50%;
+    width:50%; height:auto; max-width:none;
+    transform:translate(-50%, -48%);
+    filter:brightness(0) invert(.9) sepia(.32)
+           drop-shadow(-.6px -.6px 0 rgba(255,253,245,.95))
+           drop-shadow(.8px 1px .4px rgba(112,86,58,.55));
   }
-  /* the monogram, pressed in: pale, with a light and shadow edge */
-  .seal img{
-    position:absolute; left:50%; top:52%;
-    width:68%; height:auto; max-width:none;
-    transform:translate(-50%, -50%);
-    filter:brightness(0) invert(1) sepia(.18)
-           drop-shadow(0 -1px 0 rgba(58,32,42,.55))
-           drop-shadow(0 1px 0 rgba(255,255,255,.18));
-    opacity:.88;
-  }
-  /* while sealed only the whole face shows; the halves exist for the crack */
-  .seal-half{opacity:0;}
-  .seal-half.l{clip-path:polygon(0 0, 50% 0, 50% 100%, 0 100%);}
-  .seal-half.r{clip-path:polygon(50% 0, 100% 0, 100% 100%, 50% 100%);}
-  /* the tap simply fades the seal away */
-  .seal-face{transition:opacity .6s ease;}
-  .broken .seal-face{opacity:0;}
-  .broken .seal-rim{opacity:0;}
+  .broken .seal{opacity:0; pointer-events:none;}
 
   .lifted .letter{transform:translateY(-52%);}
 
@@ -616,7 +596,6 @@
 
   /* reduced motion: the seal, flap and letter fade rather than move */
   @media (prefers-reduced-motion:reduce){
-    .seal-face{transition:opacity .5s ease;}
     .flap{transition:opacity .6s ease;}
     .opening .flap{transform:none; opacity:0;}
     .lifted .letter{transform:none;}
@@ -712,7 +691,7 @@
 
 <!-- ============================================================
      The envelope. A portrait envelope sealed at its centre with a
-     wax stamp pressed with the monogram. Tapping cracks the seal,
+     wax stamp pressed with the monogram. Tapping fades the seal,
      opens the flap, lifts the letter, then dissolves into the page.
      ============================================================ -->
 <div class="gate" id="gate" role="button" tabindex="0" aria-label="Buka jemputan">
@@ -737,12 +716,29 @@
 
     <div class="flap-hold" id="flapHold"><div class="flap"></div></div>
 
-    <!-- the stamp: one whole face while sealed; two halves for the crack -->
+    <!-- the stamp: cream wax with the monogram embossed in it -->
     <span class="seal" aria-hidden="true">
-      <span class="seal-rim"></span>
-      <span class="seal-face"><img src="logo.png" alt=""></span>
-      <span class="seal-half l"><img src="logo.png" alt=""></span>
-      <span class="seal-half r"><img src="logo.png" alt=""></span>
+      <!-- the wax: an irregular pressed blob, a recessed disc where the stamp
+           came down, and the monogram raised out of it -->
+      <svg class="seal-wax" viewBox="0 0 100 100">
+        <defs>
+          <radialGradient id="waxBody" cx="36%" cy="30%" r="78%">
+            <stop offset="0%"   stop-color="#FCF8EF"/>
+            <stop offset="55%"  stop-color="#EFE5D2"/>
+            <stop offset="100%" stop-color="#D8C6A8"/>
+          </radialGradient>
+          <radialGradient id="waxPress" cx="44%" cy="40%" r="62%">
+            <stop offset="0%"   stop-color="#F6EFE2"/>
+            <stop offset="100%" stop-color="#E6D9C2"/>
+          </radialGradient>
+        </defs>
+        <path d="M97.12 50.00 C97.52 51.64 98.35 53.45 98.04 55.05 C97.73 56.65 96.43 58.24 95.26 59.62 C94.10 61.00 92.05 62.03 91.05 63.34 C90.06 64.65 89.84 66.08 89.29 67.49 C88.75 68.91 88.20 70.27 87.79 71.82 C87.39 73.37 87.44 75.27 86.88 76.80 C86.33 78.33 85.44 79.75 84.45 81.02 C83.46 82.28 82.19 83.34 80.94 84.37 C79.70 85.39 78.32 86.23 77.00 87.17 C75.69 88.10 74.39 89.01 73.07 89.96 C71.75 90.91 70.56 92.23 69.09 92.87 C67.61 93.51 65.82 93.47 64.23 93.79 C62.63 94.11 61.11 94.62 59.52 94.78 C57.93 94.95 56.29 94.94 54.71 94.77 C53.12 94.60 51.52 94.27 50.00 93.77 C48.48 93.26 47.06 92.21 45.61 91.73 C44.16 91.26 42.82 90.94 41.30 90.92 C39.78 90.90 38.14 91.44 36.48 91.60 C34.83 91.76 32.87 92.28 31.35 91.89 C29.83 91.50 28.52 90.33 27.34 89.24 C26.17 88.15 25.35 86.56 24.31 85.35 C23.28 84.15 22.36 82.99 21.15 82.04 C19.94 81.09 18.49 80.47 17.05 79.67 C15.61 78.87 13.81 78.26 12.50 77.24 C11.20 76.22 9.73 75.08 9.20 73.56 C8.67 72.03 9.36 69.81 9.35 68.10 C9.33 66.39 9.36 64.81 9.12 63.28 C8.89 61.76 8.38 60.39 7.94 58.94 C7.49 57.49 6.73 56.07 6.44 54.58 C6.14 53.09 6.38 51.55 6.17 50.00 C5.97 48.45 5.45 46.90 5.20 45.29 C4.94 43.68 4.53 41.96 4.64 40.36 C4.75 38.75 5.31 37.17 5.84 35.65 C6.38 34.13 7.31 32.78 7.87 31.24 C8.44 29.71 8.71 28.06 9.23 26.46 C9.75 24.87 10.11 23.06 11.00 21.67 C11.90 20.28 13.33 19.21 14.60 18.12 C15.87 17.04 16.96 15.67 18.64 15.17 C20.31 14.66 22.94 15.40 24.64 15.09 C26.34 14.78 27.54 14.11 28.83 13.33 C30.12 12.54 31.20 11.54 32.36 10.38 C33.52 9.22 34.48 7.30 35.82 6.34 C37.15 5.39 38.79 4.90 40.36 4.64 C41.93 4.38 43.64 4.72 45.25 4.81 C46.86 4.89 48.43 5.05 50.00 5.15 C51.57 5.24 53.11 5.31 54.69 5.37 C56.27 5.42 57.86 5.38 59.47 5.46 C61.08 5.54 62.83 5.38 64.34 5.86 C65.86 6.34 67.27 7.33 68.55 8.33 C69.83 9.34 70.91 10.71 72.01 11.87 C73.12 13.04 74.09 14.28 75.19 15.33 C76.29 16.39 77.59 17.14 78.61 18.23 C79.63 19.31 80.12 20.85 81.29 21.83 C82.46 22.81 84.33 23.18 85.62 24.12 C86.91 25.06 88.12 26.20 89.04 27.46 C89.97 28.72 90.50 30.24 91.17 31.67 C91.84 33.10 92.75 34.48 93.05 36.01 C93.35 37.55 92.54 39.33 92.97 40.87 C93.41 42.40 94.96 43.68 95.65 45.20 C96.34 46.72 96.72 48.36 97.12 50.00Z" fill="url(#waxBody)"/>
+        <!-- the pressed disc: shadow on its upper-left wall, light on its lower-right -->
+        <circle cx="49.2" cy="48.9" r="33.6" fill="#C9B593" opacity=".55"/>
+        <circle cx="50.8" cy="51.2" r="33.6" fill="#FFFDF7" opacity=".9"/>
+        <circle cx="50"   cy="50"   r="33"   fill="url(#waxPress)"/>
+      </svg>
+      <img class="seal-mark" src="logo.png" alt="">
     </span>
   </div>
 
