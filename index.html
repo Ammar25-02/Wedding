@@ -159,6 +159,13 @@
     color:var(--ink);
     font-variant-numeric:lining-nums tabular-nums;
   }
+  .stamp .who{
+    display:block; margin-top:.35em;
+    font-style:italic; font-size:.92em;
+    letter-spacing:.04em; text-transform:none;
+    color:var(--gold-deep);
+  }
+  .stamp + .stamp{margin-top:.5em;}
   /* a place name, set in the serif — the script face is kept for the couple */
   .venue{
     margin:0;
@@ -829,7 +836,10 @@
         <div class="stack s1">
           <p class="label">Pada</p>
           <p class="stamp" data-f="tarikhPenuh">SABTU · 7 NOVEMBER 2026</p>
-          <p class="stamp" data-f="masa">2:00 PETANG</p>
+          <p class="stamp pair2"><span data-f="masa2">11:00 PAGI</span>
+            <span class="who"><span data-f="nama4">Athirah</span> &amp; <span data-f="nama3">Razlan</span></span></p>
+          <p class="stamp"><span data-f="masa">2:00 PETANG</span>
+            <span class="who pair2"><span data-f="nama2">Atiqah</span> &amp; <span data-f="nama1">Ammar</span></span></p>
         </div>
         <div class="stack s1">
           <p class="label">Bertempat di</p>
@@ -958,16 +968,20 @@
 
     tarikhPenuh: 'SABTU · 7 NOVEMBER 2026',
 
-    /* ISI DI SINI — tambah masa tamat jika perlu, cth '2:00 – 5:00 PETANG' */
+    /* ISI DI SINI — masa majlis Ammar & Atiqah; boleh tambah masa tamat,
+       cth '2:00 – 5:00 PETANG' */
     masa:     '2:00 PETANG',
+    /* masa majlis pasangan kedua (Razlan & Athirah) — ditunjuk dahulu */
+    masa2:    '11:00 PAGI',
 
     /* ISI DI SINI — nama tempat, cth 'Kediaman Pihak Perempuan' atau nama dewan */
     tempat:   'Bella Homestay',
 
     alamat:   'No. 1, Jalan BLS 3, Taman Bukit Larang Sentosa,<br>75460 Telok Mas, Melaka',
 
-    /* the countdown runs to this moment, Malaysian time (+08:00) */
-    masaMajlis: '2026-11-07T14:00:00+08:00',
+    /* the countdown runs to this moment, Malaysian time (+08:00) —
+       the first ceremony of the day, 11 AM */
+    masaMajlis: '2026-11-07T11:00:00+08:00',
 
     /* ISI DI SINI — tampal pautan kongsi dari aplikasi.
        Biarkan kosong ('') untuk menyembunyikan butang berkenaan. */

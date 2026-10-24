@@ -125,11 +125,12 @@ small hindwing, mirrored) whose width pulses with the flap. Teal and lilac.
 ## Countdown
 
 ```js
-masaMajlis: '2026-11-07T14:00:00+08:00',
+masaMajlis: '2026-11-07T11:00:00+08:00',
 ```
 
 - **Always include `+08:00`.** Guests abroad then see the true time remaining,
-  not a count to their own local 2 PM.
+  not a count to their own local 11 AM.
+- With two ceremonies (`masa2` for the second couple), count to the earlier one.
 - On the day, the digits are replaced by *"Alhamdulillah — hari yang dinanti
   telah tiba."*
 - Labels are `<dt>` elements in the markup (Hari / Jam / Minit / Saat).
