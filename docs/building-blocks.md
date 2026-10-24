@@ -24,6 +24,8 @@ var INVITE = {
   majlis:   'Majlis Pertunangan',
   nama1:    'Ammar',
   nama2:    'Atiqah',
+  nama3:    'Razlan',     // second couple — '' for a single couple
+  nama4:    'Athirah',
   coverTarikh: 'SABTU · 7 NOVEMBER 2026',
   ...
 };

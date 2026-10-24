@@ -19,14 +19,20 @@ Open paper, taupe ink, gold diamond rules — matching the rest of the site.
 | Father's name | `bapa` | spaced capitals |
 | & | | small, soft |
 | Mother's name | `ibu` | spaced capitals |
-| *Dengan penuh syukur ke hadrat Ilahi, kami menjemput anda ke majlis … anakanda kami* | `mukadimah` | body text, balanced lines |
+| *Dengan penuh syukur ke hadrat Ilahi, kami menjemput anda ke majlis … anakanda-anakanda kami* | `mukadimah` | body text, balanced lines |
 | ◇ rule | | gold hairline |
 | Bride's name | `namaPerempuan` | spaced capitals, larger |
 | & | | |
 | Groom's name | `namaLelaki` | spaced capitals, larger |
+| & *(second couple only)* | | gold serif `.couple-and` |
+| Second bride / groom | `namaPerempuan2`, `namaLelaki2` | same as the first couple |
 
 Then: **Pada** (date, time) · **Bertempat di** (venue, address) · map buttons ·
 countdown.
+
+**Two couples (double engagement).** The second couple's block carries the
+class `.pair2`. Leave `nama3` empty in `INVITE` and every `.pair2` element
+is removed, so the same page works for one couple.
 
 **Long full names shrink automatically.** If either name is longer than 18
 characters ("… BINTI …"), the couple gets the class `.long`: smaller and

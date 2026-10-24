@@ -26,6 +26,7 @@ without that, a long pantun line spills past the edge.
 |---|---|
 | Heading above the names | `majlis` |
 | Names | `nama1`, `nama2` (script face) |
+| Second couple | `nama3`, `nama4` — the names become `.duo`: one pair per line, smaller, with a gold ◇ between. Empty `nama3` = single couple, full size |
 | Date line | `coverTarikh` |
 | Pantun | `pantun` — use `<br>` for the line break |
 | Monogram size | `.crest-mark` width |
