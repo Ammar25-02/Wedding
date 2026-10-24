@@ -799,6 +799,7 @@
             <span class="hashtag" data-f="hashtag">#AStoryWrittenSinceSchool</span>
             <span class="pair-sep pair2" aria-hidden="true"><i></i></span>
             <span class="pair pair2"><span data-f="nama3">Razlan</span><span class="amp">&amp;</span><span data-f="nama4">Athirah</span></span>
+            <span class="hashtag pair2" data-f="hashtag2">#ConnectedByFriendsChosenByLove</span>
           </h1>
           <div class="rule" aria-hidden="true"><i></i></div>
           <p class="stamp" data-f="coverTarikh">SABTU · 7 NOVEMBER 2026</p>
@@ -949,6 +950,8 @@
 
     /* ISI DI SINI — hashtag majlis. Kosong ('') untuk menyembunyikannya. */
     hashtag:  '#AStoryWrittenSinceSchool',
+    /* hashtag pasangan kedua, di bawah Razlan & Athirah. Kosong ('') untuk menyembunyikannya. */
+    hashtag2: '#ConnectedByFriendsChosenByLove',
 
     /* ---- the jemputan, shown in this order ---- */
 
@@ -1017,6 +1020,7 @@
     if(/<br>|<em>|<strong>/.test(v)) el.innerHTML = v; else el.textContent = v;
   });
   if(!INVITE.hashtag) $('.hashtag').remove();
+  if(!INVITE.hashtag2 && $('[data-f=hashtag2]')) $('[data-f=hashtag2]').remove();
   document.title = INVITE.nama1 + ' & ' + INVITE.nama2 +
     (INVITE.nama3 ? ' · ' + INVITE.nama3 + ' & ' + INVITE.nama4 : '');
 
