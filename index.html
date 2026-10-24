@@ -238,7 +238,9 @@
   .cartouche svg{position:absolute; inset:0; width:100%; height:100%; z-index:0;}
   .cartouche .stack{position:relative; z-index:1;}
   .hashtag{
-    margin:0;
+    display:block;
+    margin:.2em 0 .1em;
+    font-family:var(--serif); line-height:1.4; white-space:normal;
     font-size:clamp(14px, 4vw, 16px);
     letter-spacing:.1em; text-indent:.1em;
     color:var(--gold-deep);
@@ -794,13 +796,13 @@
           <p class="eyebrow" data-f="majlis">Majlis Pertunangan</p>
           <h1 class="names duo">
             <span class="pair"><span data-f="nama1">Ammar</span><span class="amp">&amp;</span><span data-f="nama2">Atiqah</span></span>
+            <span class="hashtag" data-f="hashtag">#AStoryWrittenSinceSchool</span>
             <span class="pair-sep pair2" aria-hidden="true"><i></i></span>
             <span class="pair pair2"><span data-f="nama3">Razlan</span><span class="amp">&amp;</span><span data-f="nama4">Athirah</span></span>
           </h1>
           <div class="rule" aria-hidden="true"><i></i></div>
           <p class="stamp" data-f="coverTarikh">SABTU · 7 NOVEMBER 2026</p>
           <p class="verse" data-f="pantun">Dua hati satu ikatan,<br>moga berkekalan hingga ke syurga.</p>
-          <p class="hashtag" data-f="hashtag">#something</p>         
         </div>
       </div>
     </div>
@@ -1014,7 +1016,7 @@
     if(v === undefined || v === null) return;
     if(/<br>|<em>|<strong>/.test(v)) el.innerHTML = v; else el.textContent = v;
   });
-  if(!INVITE.hashtag) $('.hashtag').hidden = true;
+  if(!INVITE.hashtag) $('.hashtag').remove();
   document.title = INVITE.nama1 + ' & ' + INVITE.nama2 +
     (INVITE.nama3 ? ' · ' + INVITE.nama3 + ' & ' + INVITE.nama4 : '');
 
