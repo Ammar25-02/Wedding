@@ -839,10 +839,8 @@
         <div class="stack s1">
           <p class="label">Pada</p>
           <p class="stamp" data-f="tarikhPenuh">SABTU · 7 NOVEMBER 2026</p>
-          <p class="stamp pair2"><span data-f="masa2">11:00 PAGI</span>
-            <span class="who"><span data-f="nama4">Athirah</span> &amp; <span data-f="nama3">Razlan</span></span></p>
-          <p class="stamp"><span data-f="masa">2:00 PETANG</span>
-            <span class="who pair2"><span data-f="nama2">Atiqah</span> &amp; <span data-f="nama1">Ammar</span></span></p>
+          <p class="stamp"><span data-f="masa">ANGGARAN 12 TENGAH HARI</span>
+            <span class="who" data-f="acara">Jamuan Makan</span></p>
         </div>
         <div class="stack s1">
           <p class="label">Bertempat di</p>
@@ -973,11 +971,10 @@
 
     tarikhPenuh: 'SABTU · 7 NOVEMBER 2026',
 
-    /* ISI DI SINI — masa majlis Ammar & Atiqah; boleh tambah masa tamat,
-       cth '2:00 – 5:00 PETANG' */
-    masa:     '2:00 PETANG',
-    /* masa majlis pasangan kedua (Razlan & Athirah) — ditunjuk dahulu */
-    masa2:    '11:00 PAGI',
+    /* ISI DI SINI — masa majlis, cth '2:00 – 5:00 PETANG' */
+    masa:     'ANGGARAN 12 TENGAH HARI',
+    /* di bawah masa, huruf condong. Kosong ('') untuk menyembunyikannya. */
+    acara:    'Jamuan Makan',
 
     /* ISI DI SINI — nama tempat, cth 'Kediaman Pihak Perempuan' atau nama dewan */
     tempat:   'Bella Homestay',
@@ -985,8 +982,8 @@
     alamat:   'No. 1, Jalan BLS 3, Taman Bukit Larang Sentosa,<br>75460 Telok Mas, Melaka',
 
     /* the countdown runs to this moment, Malaysian time (+08:00) —
-       the first ceremony of the day, 11 AM */
-    masaMajlis: '2026-11-07T11:00:00+08:00',
+       the jamuan at 12 noon */
+    masaMajlis: '2026-11-07T12:00:00+08:00',
 
     /* ISI DI SINI — tampal pautan kongsi dari aplikasi.
        Biarkan kosong ('') untuk menyembunyikan butang berkenaan. */
@@ -1020,6 +1017,7 @@
     if(/<br>|<em>|<strong>/.test(v)) el.innerHTML = v; else el.textContent = v;
   });
   if(!INVITE.hashtag) $('.hashtag').remove();
+  if(!INVITE.acara) $('[data-f=acara]').remove();
   if(!INVITE.hashtag2 && $('[data-f=hashtag2]')) $('[data-f=hashtag2]').remove();
   document.title = INVITE.nama1 + ' & ' + INVITE.nama2 +
     (INVITE.nama3 ? ' · ' + INVITE.nama3 + ' & ' + INVITE.nama4 : '');
