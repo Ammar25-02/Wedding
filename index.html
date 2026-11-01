@@ -165,7 +165,14 @@
     letter-spacing:.04em; text-transform:none;
     color:var(--gold-deep);
   }
-  .stamp .who.before{margin:0 0 .35em;}
+  /* "Jamuan Makan" above the time, set like the PADA label */
+  .stamp .who.before{
+    margin:0 0 .5em;
+    font-style:normal;
+    font-size:clamp(10.5px, 2.9vw, 12px);
+    letter-spacing:.34em; text-indent:.34em; text-transform:uppercase;
+    color:var(--ink-soft);
+  }
   .stamp + .stamp{margin-top:.5em;}
   /* a place name, set in the serif — the script face is kept for the couple */
   .venue{
