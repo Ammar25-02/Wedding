@@ -165,6 +165,7 @@
     letter-spacing:.04em; text-transform:none;
     color:var(--gold-deep);
   }
+  .stamp .who.before{margin:0 0 .35em;}
   .stamp + .stamp{margin-top:.5em;}
   /* a place name, set in the serif — the script face is kept for the couple */
   .venue{
@@ -839,8 +840,8 @@
         <div class="stack s1">
           <p class="label">Pada</p>
           <p class="stamp" data-f="tarikhPenuh">SABTU · 7 NOVEMBER 2026</p>
-          <p class="stamp"><span data-f="masa">ANGGARAN 12 TENGAH HARI</span>
-            <span class="who" data-f="acara">Jamuan Makan</span></p>
+          <p class="stamp"><span class="who before" data-f="acara">Jamuan Makan</span>
+            <span data-f="masa">12:30 TENGAH HARI</span></p>
         </div>
         <div class="stack s1">
           <p class="label">Bertempat di</p>
@@ -972,8 +973,8 @@
     tarikhPenuh: 'SABTU · 7 NOVEMBER 2026',
 
     /* ISI DI SINI — masa majlis, cth '2:00 – 5:00 PETANG' */
-    masa:     'ANGGARAN 12 TENGAH HARI',
-    /* di bawah masa, huruf condong. Kosong ('') untuk menyembunyikannya. */
+    masa:     '12:30 TENGAH HARI',
+    /* di atas masa, huruf condong. Kosong ('') untuk menyembunyikannya. */
     acara:    'Jamuan Makan',
 
     /* ISI DI SINI — nama tempat, cth 'Kediaman Pihak Perempuan' atau nama dewan */
@@ -982,8 +983,8 @@
     alamat:   'No. 1, Jalan BLS 3, Taman Bukit Larang Sentosa,<br>75460 Telok Mas, Melaka',
 
     /* the countdown runs to this moment, Malaysian time (+08:00) —
-       the jamuan at 12 noon */
-    masaMajlis: '2026-11-07T12:00:00+08:00',
+       the jamuan at 12:30 */
+    masaMajlis: '2026-11-07T12:30:00+08:00',
 
     /* ISI DI SINI — tampal pautan kongsi dari aplikasi.
        Biarkan kosong ('') untuk menyembunyikan butang berkenaan. */
